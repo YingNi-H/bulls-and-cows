@@ -1,3 +1,4 @@
+import java.lang.reflect.Array;
 
 public class PlayerOnlyGuess {
     protected int[] computerSecreteNumber;
@@ -28,19 +29,25 @@ public class PlayerOnlyGuess {
         playerGuess= new int[4];
         String playerGuessstr= Keyboard.readInput();
         for (int i = 0; i < 4; i++) {
-            playerGuess[i]= Integer.parseInt(playerGuessstr.valueOf(i));
+            playerGuess[i]= Integer.parseInt(String.valueOf(i));
         }
-        //System.out.println(playerGuess.length);
+
+        System.out.println(playerGuess.length);
 
 
-//        for (int i = 0; i < 4; i++) {
-//            if(playerGuess[i]==computerSecreteNumber[i]){
-//                numberOfBulls++;
-//            }
-//
-//        }
-        if((playerGuess[1]==computerSecreteNumber[1])){
-            numberOfBulls=numberOfBulls+1;
+
+        for (int i = 0; i < 4; i++) {
+            if(playerGuess[i]==computerSecreteNumber[i]){
+                numberOfBulls++;
+                System.out.println(playerGuess[i]);
+            }
+
+        }
+
+
+
+/* if((playerGuess.equals(computerSecreteNumber))){
+            numberOfBulls=4;
             System.out.println("playerGuess[1]==computerSecreteNumber[1]");
         }
         if((playerGuess[0]==computerSecreteNumber[0])){
@@ -57,7 +64,7 @@ public class PlayerOnlyGuess {
             System.out.println("playerGuess[3]==computerSecreteNumber[3]");
         }
 
-
+*/
 
         /*if((playerGuess[0]!=computerSecreteNumber[0])&&((playerGuess[0]==computerSecreteNumber[1])
                 ||(playerGuess[0]==computerSecreteNumber[2])||(playerGuess[0]==computerSecreteNumber[3]))){
