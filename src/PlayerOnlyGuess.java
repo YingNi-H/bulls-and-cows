@@ -9,13 +9,25 @@ import java.util.ArrayList;
 public class PlayerOnlyGuess {
     protected int[] computerSecreteNumber;
     protected int[] playerGuess;
-    protected String eachResult;
+    protected int[] eachResult;
     protected String finalResult;
-    protected int numberOfBulls=0;
-    protected int numberOfCows=0;
+    protected int numberOfBulls;
+    protected int numberOfCows;
 
-    public PlayerOnlyGuess(){
+
+    /*public PlayerOnlyGuess(int[]playerGuess,int[]eachResult){
         this.playerGuess= new int[4];
+
+        this.eachResult = new int[7];
+    }*/
+
+    public PlayerOnlyGuess() {
+        //this.numberOfBulls= numberOfBulls;
+        //this.numberOfCows= numberOfCows;
+        this.playerGuess= new int[4];
+
+        this.eachResult = new int[7];
+
     }
 
 
@@ -53,8 +65,8 @@ public class PlayerOnlyGuess {
 
         int count=0;
 
-        for (int i = 0; i < 7; i++) {
-            count++;
+        for (int i = 0; i < eachResult.length; i++) {
+
             while (!Arrays.equals(playerGuess, computerSecreteNumber)) {
                 String playerGuessstr = Keyboard.readInput();
                 i++;
@@ -90,9 +102,11 @@ public class PlayerOnlyGuess {
                 System.out.println("Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
                 System.out.println("Results: " + numberOfBulls + " bulls and " + numberOfCows + " cows");
 
-                i++;
+
 
             }
+            //eachResult= numberOfBulls+","+numberOfCows;
+            eachResult[i]=(numberOfBulls, numberOfCows);
 
             System.out.println("You win!");
             break;
@@ -105,14 +119,14 @@ public class PlayerOnlyGuess {
 
 
 
-    public String getEachResult(){return eachResult;}
+    public int[] getEachResult(){return eachResult;}
 
 
     public String getFinalResult() {return finalResult;}
 
     public static void main(String[] args){
-        PlayerOnlyGuess player= new PlayerOnlyGuess();
-        player.compare();
+        PlayerOnlyGuess eachResult= new PlayerOnlyGuess();
+        eachResult.compare();
 
     }
 
