@@ -63,18 +63,17 @@ public class PlayerOnlyGuess {
 
         System.out.println("Please enter your guess: ");
 
+
         int count=0;
-
-        for (int i = 0; i < eachResult.length; i++) {
-
-            while (!Arrays.equals(playerGuess, computerSecreteNumber)) {
+        while (count<7 &&(!Arrays.equals(playerGuess, computerSecreteNumber))) {
                 String playerGuessstr = Keyboard.readInput();
-                i++;
+                count++;
+                numberOfCows=0;
+                numberOfBulls=0;
                 playerGuess = new int[4];
                 for (int j = 0; j <4; j++) {
                     playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
                 }
-
 
                 for (int k = 0; k < 4; k++) {
                     if (playerGuess[k] == computerSecreteNumber[k]) {
@@ -98,23 +97,23 @@ public class PlayerOnlyGuess {
                         || (playerGuess[3] == computerSecreteNumber[2]) || (playerGuess[3] == computerSecreteNumber[0]))) {
                     numberOfCows++;
                 }
-
                 System.out.println("Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
                 System.out.println("Results: " + numberOfBulls + " bulls and " + numberOfCows + " cows");
-
-
-
             }
             //eachResult= numberOfBulls+","+numberOfCows;
-            eachResult[i]=(numberOfBulls, numberOfCows);
+            //eachResult[i]=(numberOfBulls, numberOfCows);
+        if(Arrays.equals(playerGuess, computerSecreteNumber)){
+            System.out.println("You win!");}
+        else{
+            System.out.println("You didn't get it.");
+        }
 
-            System.out.println("You win!");
-            break;
+
+
+
 
         }
-        if(!Arrays.equals(playerGuess, computerSecreteNumber)){
-           System.out.println("You didn't get it.");}
-    }
+
 
 
 
