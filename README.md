@@ -1,3 +1,4 @@
+![Ying-Ni First Design](https://user-images.githubusercontent.com/100735265/162842594-4974791e-a0b8-4124-b520-1f30ad4c761d.png)
 # Bulls & Cows
 
 ## Overview
