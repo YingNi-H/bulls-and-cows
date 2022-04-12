@@ -17,8 +17,10 @@ public class PlayerOnlyGuess {
 
     }
     public void start(){
+
         setComputerSecreteNumber();
-        compare(Integer computerSecreteNumber);
+        //compare(Set<Integer> computerSecreteNumber);
+        compare();
     }
 
 
@@ -37,16 +39,25 @@ public class PlayerOnlyGuess {
 
     }
 
-    public void compare(Integer computerSecreteNumber) {
+    //public void compare(Set<Integer> computerSecreteNumber) {
+        public void compare() {
         System.out.println("Please enter your guess: ");
-        Set<Integer> playerGuess = new HashSet<Integer>(4);
-        playerGuess.add(Integer.parseInt(Keyboard.readInput()));
+        String playerGuessstr = Keyboard.readInput();
+
+        playerGuess = new int[4];
+        for (int j = 0; j <4; j++) {
+            playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
+        }
+        Set<Integer> playerGuessSet = Arrays.(playerGuess);
 
 
 
-        int count=0;
 
-        System.out.println("Your guess: " + playerGuess);
+
+        int counter=0;
+            while (counter<7 &&(!Arrays.equals(playerGuess, computerSecreteNumber))) {
+
+            System.out.println("Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
 
 
 
