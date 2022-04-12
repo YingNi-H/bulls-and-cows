@@ -18,7 +18,11 @@ public class PlayerOnlyGuess {
     public void start(){
 
         int[] computerSecreteNumber = setComputerSecreteNumber();
-        compare(computerSecreteNumber);
+        game(computerSecreteNumber);
+        //int[] playerGuess = getPlayerGuess();
+        //boolean win = win(computerSecreteNumber, playerGuess);
+
+
 
     }
 
@@ -42,54 +46,53 @@ public class PlayerOnlyGuess {
             System.out.print(element);
         }
 
-      return computerSecreteNumber;
+        return computerSecreteNumber;
 
     }
 
+    public int[] getPlayerGuess(){
+        String playerGuessstr = Keyboard.readInput();
+        int[] playerGuess = new int[4];
+        for (int j = 0; j <4; j++) {
+            playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
+        }
+        return playerGuess;
+    }
 
 
-
-
-    public void compare(int[] computerSecreteNumber) {
-
-        System.out.print("Please enter your guess: ");
-
+    public void game(int[] computerSecreteNumber) {
+        boolean win = false;
         int counter =0;
-            while (counter < 7 ) {
-                String playerGuessstr = Keyboard.readInput();
-                int[] playerGuess = new int[4];
-                for (int j = 0; j <4; j++) {
-                    playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
-                }
-
+        System.out.println("Please enter your guess: ");
+            while (counter < 3 ) {
+                int [] playerGuess = getPlayerGuess();
                 counter++;
-
                 int bulls = getBulls(playerGuess, computerSecreteNumber);
                 int cows= getCows(playerGuess, computerSecreteNumber);
                 printEachResult(bulls, cows, playerGuess);
-
-                if(Arrays.equals(playerGuess, computerSecreteNumber)){
-                    System.out.println("Congradulation! You win!");
+                win = win(playerGuess, computerSecreteNumber);
+                if(win){
+                    System.out.println("Congratulation! You win!");
+                    break;
                 }
 
             }
-            System.out.println("Time's up. You didn't get it!");
-
-
-
-
+            if(!win){System.out.println("Time's up. You didn't get it!");}
 
 
 
     }
+
+    public boolean win(int[] playerGuess, int[] computerSecreteNumber){
+
+        return Arrays.equals(playerGuess, computerSecreteNumber);
+    }
+
     public void printEachResult(int bulls, int cows, int[] playerGuess){
         System.out.println("Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
         System.out.println("Results: "+ bulls + " bulls " + cows + " cows") ;
-        System.out.print(">>");
+        System.out.println("-----");
     }
-
-
-
 
 
     public int getBulls(int[] playerGuess, int[] computerSecreteNumber){
