@@ -44,7 +44,6 @@ public class EasyAI extends PlayerOnlyGuess {
             int bulls = getBulls(playerGuess, computerSecreteNumber);
             int cows= getCows(playerGuess, computerSecreteNumber);
             int [] computerGuess = super.setComputerSecreteNumber();
-
             int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
             int cowsComputer= getCows(computerGuess, playerSecreteNumber);
             printEachResult(bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
@@ -60,10 +59,8 @@ public class EasyAI extends PlayerOnlyGuess {
 
 
         }
-        if(!win){System.out.println("Time's up. You didn't get it!");
-        }else if(!winCom){
-            System.out.println("Computer didn't get it!");
-        }
+        System.out.println("Draw! You and computer didn't get it!");
+
 
 
 
@@ -79,10 +76,10 @@ public class EasyAI extends PlayerOnlyGuess {
         return super.winPlayer(computerGuess, playerSecreteNumber);
     }
 
-    //@Override
+
     public void printEachResult(int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
-        super.printEachResult(bulls, cows, playerGuess);
-        System.out.println();
+        System.out.println("Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
+        System.out.println("Results: " + bulls + " bulls " + cows + " cows") ;
         System.out.println("Computer guess: " + computerGuess[0] + "" + computerGuess[1] + "" + computerGuess[2] + "" + computerGuess[3]);
         System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
         System.out.println("-----");
@@ -91,7 +88,7 @@ public class EasyAI extends PlayerOnlyGuess {
 
     @Override
     public int getBulls(int[] playerGuess, int[] computerSecreteNumber) {
-        System.out.println(playerGuess+ ""+computerSecreteNumber);
+        //System.out.println(playerGuess+ ""+computerSecreteNumber);
         return super.getBulls(playerGuess, computerSecreteNumber);
     }
 
