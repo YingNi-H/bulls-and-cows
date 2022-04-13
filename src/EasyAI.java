@@ -57,12 +57,8 @@ public class EasyAI extends PlayerOnlyGuess {
                 break;
             }
 
-
         }
-        System.out.println("Draw! You and computer didn't get it!");
-
-
-
+        if((!win) && (!winCom) ){System.out.println("Draw! You and computer didn't get it!");}
 
     }
 
