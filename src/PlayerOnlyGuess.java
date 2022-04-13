@@ -8,20 +8,10 @@ public class PlayerOnlyGuess {
     protected int cows;
 
 
-
-    public PlayerOnlyGuess() {
-
-
-
-    }
     public void start(){
 
         int[] computerSecreteNumber = setComputerSecreteNumber();
         game(computerSecreteNumber);
-        //int[] playerGuess = getPlayerGuess();
-        //boolean win = win(computerSecreteNumber, playerGuess);
-
-
 
     }
 
@@ -96,7 +86,7 @@ public class PlayerOnlyGuess {
         int bulls = 0;
         for (int i = 0; i < 4; i++) {
             if(playerGuess[i] == computerSecreteNumber[i]){
-                bulls++;
+               bulls++;
             }
         }
         return bulls;
@@ -117,10 +107,6 @@ public class PlayerOnlyGuess {
     }
 
 
-    /*public static void main(String[] args){
-        new PlayerOnlyGuess().start();
-
-    }*/
 
 
 }
