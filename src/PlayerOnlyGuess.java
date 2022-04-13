@@ -29,9 +29,9 @@ public class PlayerOnlyGuess {
             computerSecreteNumber[i] = list.get(i);
         }
 
-        for(Integer element : computerSecreteNumber){
-            System.out.println(element);
-        }
+        //for(Integer element : computerSecreteNumber){
+            //System.out.println(element);
+        //}
 
         return computerSecreteNumber;
 

@@ -21,7 +21,7 @@ public class GameControl {
         //boolean validInput = false;
 
         while(true) {
-            try{
+
 
                 level = Keyboard.readInput().toLowerCase();
 
@@ -48,14 +48,14 @@ public class GameControl {
                     break;
 
             }
-            break;
 
-            /*try {int num = Integer.parseInt(level);
+
+            try {int num = Integer.parseInt(level);
                 if (num <= 4 && num > 0){
-                    validInput = true;
+                    break;
                 }else{
                     System.out.println("Choose between 1-4 or proper level! ");
-                }*/
+                }
             } catch (NumberFormatException e) {
                 System.out.println("Unrecognized command, please enter again!");
             }
