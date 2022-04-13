@@ -43,15 +43,17 @@ public class PlayerOnlyGuess {
         while(!valid) {
             try {
                 playerGuessstr = Keyboard.readInput();
+                int temp = Integer.parseInt(playerGuessstr);
 
                 if (playerGuessstr.length() < 4) {
-                    System.out.println("4 digits numbers!");
+                    System.out.println("Enter 4 digits numbers!");
                     valid = true;
                 }
                 break;
 
             } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
                 System.out.println("Error: " + e.getMessage());
+                valid = true;
 
             }
         }
