@@ -37,12 +37,10 @@ public class PlayerOnlyGuess {
         int[] computerSecreteNumber = new int[4];
         for (int i = 0; i < 4; i++) {
             computerSecreteNumber[i] = list.get(i);
-
         }
 
-
         for(Integer element : computerSecreteNumber){
-            System.out.print(element);
+            System.out.println(element);
         }
 
         return computerSecreteNumber;

@@ -14,10 +14,9 @@ public class EasyAI extends PlayerOnlyGuess {
         gameComputer(playerSecreteNumber);
         int bulls = getBulls(playerGuess, computerSecreteNumber);
         int cows = getCows(playerGuess, computerSecreteNumber);
-
         int bullsComputer = getBullsComputer(computerGuess, playerSecreteNumber);
         int cowsComputer = getCowsComputer(computerGuess, playerSecreteNumber);
-        printEachResult(bulls, cows, playerGuess,bullsComputer, cowsComputer, computerGuess);
+        printEachResult(bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
 
     }
 
@@ -29,6 +28,7 @@ public class EasyAI extends PlayerOnlyGuess {
     public int[] setPlayerSecreteNumber(){
         System.out.println("Please enter your secrete number: ");
         int[] playerSecreteNumber = super.getPlayerGuess();
+        System.out.println("-----");
         return playerSecreteNumber;
     }
 

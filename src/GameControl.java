@@ -14,10 +14,11 @@ public class GameControl {
 
         switch (level){
             case "playeronly":
-                new PlayerOnlyGuess().start();
+                only.start();
                 break;
             case "easy":
-                new EasyAI().start();
+                easy.start();
+                break;
             /*case "medium":
                 new MediumAI();
             case "hard":
