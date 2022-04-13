@@ -38,11 +38,26 @@ public class PlayerOnlyGuess {
     }
 
     public int[] getPlayerGuess(){
-        String playerGuessstr = Keyboard.readInput();
+        String playerGuessstr = "" ;
+        boolean valid = false;
+        while(!valid) {
+            try {
+                playerGuessstr = Keyboard.readInput();
+
+                if (playerGuessstr.length() < 4) {
+                    System.out.println("4 digits numbers!");
+                    valid = true;
+                }
+                break;
+
+            } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
+                System.out.println("Error: " + e.getMessage());
+
+            }
+        }
         int[] playerGuess = new int[4];
         for (int j = 0; j <4; j++) {
-            playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
-        }
+            playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));}
         return playerGuess;
     }
 
