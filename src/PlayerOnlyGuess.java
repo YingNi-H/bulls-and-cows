@@ -90,7 +90,7 @@ public class PlayerOnlyGuess {
 
     public void printEachResult(int bulls, int cows, int[] playerGuess){
         System.out.println("Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
-        System.out.println("Results: "+ bulls + " bulls " + cows + " cows") ;
+        System.out.println("Results: " + bulls + " bulls " + cows + " cows") ;
         System.out.println("-----");
     }
 
@@ -98,7 +98,7 @@ public class PlayerOnlyGuess {
     public int getBulls(int[] playerGuess, int[] computerSecreteNumber){
         int bulls = 0;
         for (int i = 0; i < 4; i++) {
-            if(playerGuess[i]== computerSecreteNumber[i]){
+            if(playerGuess[i] == computerSecreteNumber[i]){
                 bulls++;
             }
         }
@@ -120,10 +120,10 @@ public class PlayerOnlyGuess {
     }
 
 
-    public static void main(String[] args){
+    /*public static void main(String[] args){
         new PlayerOnlyGuess().start();
 
-    }
+    }*/
 
 
 
