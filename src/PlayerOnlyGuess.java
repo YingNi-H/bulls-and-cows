@@ -4,7 +4,6 @@ import java.util.*;
 public class PlayerOnlyGuess {
     protected int[] computerSecreteNumber;
     protected int[] playerGuess;
-    protected int[] eachResult;
     protected int bulls;
     protected int cows;
 
@@ -70,7 +69,7 @@ public class PlayerOnlyGuess {
                 int bulls = getBulls(playerGuess, computerSecreteNumber);
                 int cows= getCows(playerGuess, computerSecreteNumber);
                 printEachResult(bulls, cows, playerGuess);
-                win = win(playerGuess, computerSecreteNumber);
+                win = winPlayer(playerGuess, computerSecreteNumber);
                 if(win){
                     System.out.println("Congratulation! You win!");
                     break;
@@ -83,7 +82,7 @@ public class PlayerOnlyGuess {
 
     }
 
-    public boolean win(int[] playerGuess, int[] computerSecreteNumber){
+    public boolean winPlayer(int[] playerGuess, int[] computerSecreteNumber){
 
         return Arrays.equals(playerGuess, computerSecreteNumber);
     }
@@ -124,8 +123,6 @@ public class PlayerOnlyGuess {
         new PlayerOnlyGuess().start();
 
     }*/
-
-
 
 
 }

@@ -48,7 +48,7 @@ public class EasyAI extends PlayerOnlyGuess {
             int bulls = getBulls(playerGuess, computerSecreteNumber);
             int cows= getCows(playerGuess, computerSecreteNumber);
             printEachResult(bulls, cows, playerGuess);
-            win = win(playerGuess, computerSecreteNumber);
+            win = winPlayer(playerGuess, computerSecreteNumber);
             if(win){
                 System.out.println("Congratulation! You win!");
                 break;
@@ -61,7 +61,7 @@ public class EasyAI extends PlayerOnlyGuess {
     }
 
     public void gameComputer(int[] playerSecreteNumber){
-        boolean win = false;
+        boolean winCom = false;
         int counter =0;
 
         while (counter < 3 ) {
@@ -70,14 +70,14 @@ public class EasyAI extends PlayerOnlyGuess {
             int bulls = getBulls(computerGuess, playerSecreteNumber);
             int cows= getCows(computerGuess, playerSecreteNumber);
             printEachResult(bulls, cows, computerGuess);
-            win = win(computerGuess, playerSecreteNumber);
-            if(win){
-                System.out.println("Congratulation! You win!");
+            winCom = winComputer(computerGuess, playerSecreteNumber);
+            if(winCom){
+                System.out.println("Computer win!");
                 break;
             }
 
         }
-        if(!win){System.out.println("Time's up. You didn't get it!");}
+        if(!winCom){System.out.println("Computer didn't get it!");}
 
 
 
@@ -85,12 +85,12 @@ public class EasyAI extends PlayerOnlyGuess {
     }
 
     @Override
-    public boolean win(int[] playerGuess, int[] computerSecreteNumber) {
-        return super.win(playerGuess, computerSecreteNumber);
+    public boolean winPlayer(int[] playerGuess, int[] computerSecreteNumber) {
+        return super.winPlayer(playerGuess, computerSecreteNumber);
     }
 
     public boolean winComputer(int[] computerGuess, int[] playerSecreteNumber) {
-        return super.win(computerGuess, playerSecreteNumber);
+        return super.winPlayer(computerGuess, playerSecreteNumber);
     }
 
     //@Override
@@ -137,7 +137,7 @@ public class EasyAI extends PlayerOnlyGuess {
         return cowsComputer;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         new EasyAI().start();
-    }
+    }*/
 }
