@@ -17,7 +17,7 @@ public class GameControl {
         System.out.println("2 - Easy");
         System.out.println("3 - Medium");
         System.out.println("4 - Hard");
-        System.out.print(">>");
+        System.out.print(">> ");
 
         boolean valid = false;
 
@@ -46,8 +46,8 @@ public class GameControl {
                         valid = true;
                         break;
                     default:
-                        System.out.println("Invalid command! ");
-                        System.out.println("Choose level: ");
+                        System.out.println("Invalid command! Try again >>");
+
                 }
 
         }

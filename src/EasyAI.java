@@ -1,10 +1,17 @@
-public class EasyAI extends PlayerOnlyGuess {
-    public EasyAI() {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    }
+public class EasyAI extends PlayerOnlyGuess {
+
+        public static int max_turn;
+        public static int max_digits;
+
+
 
     @Override
     public void start() {
+        configurations();
         int[] playerSecreteNumber =setPlayerSecreteNumber();
 
         int[] computerSecreteNumber = setComputerSecreteNumber();
@@ -14,22 +21,109 @@ public class EasyAI extends PlayerOnlyGuess {
 
     }
 
-    @Override
-    public int[] setComputerSecreteNumber() {
-        return super.setComputerSecreteNumber();
+    private void configurations() {
+        System.out.println("Please choose maximum turns of guesses 7 or 10:  ");
+        while(true){
+            try{
+
+                max_turn = Integer.parseInt(Keyboard.readInput());
+                if(max_turn == 7 || max_turn == 10){
+                    break;
+                }else{
+                    System.out.println("Choose 7 or 10! Try again >> ");
+                }
+            }catch(NumberFormatException e){
+                System.out.println("Not a valid number! Try again >> ");
+            }
+        }
+        System.out.println("Please choose maximum digits 4 or 6: ");
+        while(true){
+            try{
+
+                max_digits = Integer.parseInt(Keyboard.readInput());
+                if(max_digits == 4 || max_digits == 6){
+                    break;
+                }else{
+                    System.out.println("Choose 4 or 6! Try again >> ");
+                }
+            }catch(NumberFormatException e){
+                System.out.println("Not a valid number! Try again >> ");
+            }
+       }
+
+
     }
+
+
+    public int[] setComputerSecreteNumber() {
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < 10; i++){
+            list.add(i);
+        }
+
+        Collections.shuffle(list);
+
+        int[] computerSecreteNumber = new int[max_digits];
+        for (int i = 0; i < max_digits; i++) {
+            computerSecreteNumber[i] = list.get(i);
+        }
+
+//        for(Integer element : computerSecreteNumber){
+//            System.out.println(element);
+//        }
+
+        return computerSecreteNumber;
+
+    }
+
+
 
     public int[] setPlayerSecreteNumber(){
         System.out.println("Please enter your secrete number: ");
-        int[] playerSecreteNumber = super.getPlayerGuess();
-        System.out.println("-----");
+        int[] playerSecreteNumber = getPlayerGuess();
+        System.out.println("----------");
         return playerSecreteNumber;
     }
 
-    @Override
-    public int[] getPlayerGuess() {
-        return super.getPlayerGuess();
+
+    public int[] getPlayerGuess(){
+        String playerGuessstr = "" ;
+        boolean valid = false;
+        while(!valid) {
+            try {
+                playerGuessstr = Keyboard.readInput();
+
+                int temp = Integer.parseInt(playerGuessstr);
+
+                if ((playerGuessstr.length()) != max_digits) {
+                    throw new StringIndexOutOfBoundsException(max_digits + " digits numbers!");
+                }
+
+                for (int i = 0; i < max_digits; i++) {
+                    for (int j = 0; j < max_digits; j++) {
+                        if( (i != j) && playerGuessstr.charAt(i) == playerGuessstr.charAt(j)){
+
+                            throw new SameNumberException("No same numbers!");
+                        }
+                    }
+
+                }
+                valid = true;
+
+            } catch ( NumberFormatException | StringIndexOutOfBoundsException | SameNumberException e) {
+                System.out.println("Error: " + e.getMessage() + " Try a valid number >> ");
+
+            }
+        }
+        int[] playerGuess = new int[max_digits];
+        for (int j = 0; j < max_digits; j++) {
+            playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
+
+        }
+
+        return playerGuess;
     }
+
 
 
     public void game(int[] computerSecreteNumber, int[] playerSecreteNumber) {
@@ -37,13 +131,13 @@ public class EasyAI extends PlayerOnlyGuess {
         boolean winCom = false;
         int counter =0;
 
-        while (counter < 3 ) {
-            System.out.println(">");
+        while (counter < max_turn ) {
+            System.out.print("Enter your guess > ");
             int [] playerGuess = getPlayerGuess();
             counter++;
             int bulls = getBulls(playerGuess, computerSecreteNumber);
             int cows= getCows(playerGuess, computerSecreteNumber);
-            int [] computerGuess = super.setComputerSecreteNumber();
+            int [] computerGuess = setComputerSecreteNumber();
             int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
             int cowsComputer= getCows(computerGuess, playerSecreteNumber);
             printEachResult(bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
@@ -74,23 +168,53 @@ public class EasyAI extends PlayerOnlyGuess {
 
 
     public void printEachResult(int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
-        System.out.println("Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
+        System.out.println("Your guess: " );
+        for (int i = 0; i < max_digits; i++) {
+            System.out.print(playerGuess[i]);
+
+        }
+        System.out.println();
         System.out.println("Results: " + bulls + " bulls " + cows + " cows") ;
-        System.out.println("Computer guess: " + computerGuess[0] + "" + computerGuess[1] + "" + computerGuess[2] + "" + computerGuess[3]);
+        System.out.println("Computer guess: " );
+        for (int i = 0; i < max_digits; i++) {
+            System.out.print(computerGuess[i]);
+
+        }
+        System.out.println();
         System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
-        System.out.println("-----");
+        System.out.println("----------");
 
     }
 
-    @Override
-    public int getBulls(int[] playerGuess, int[] computerSecreteNumber) {
-        //System.out.println(playerGuess+ ""+computerSecreteNumber);
-        return super.getBulls(playerGuess, computerSecreteNumber);
+    public int getBulls(int[] playerGuess, int[] computerSecreteNumber){
+        int bulls = 0;
+        for (int i = 0; i < max_digits; i++) {
+            if(playerGuess[i] == computerSecreteNumber[i]){
+                bulls++;
+            }
+        }
+        return bulls;
     }
+
+    public int getCows(int[] playerGuess, int[] computerSecreteNumber){
+        int cows = 0;
+        for (int i = 0; i < max_digits; i++) {
+            for (int j = 0; j < max_digits; j++) {
+                if((i != j) && playerGuess[i] == computerSecreteNumber[j]){
+                    cows++;
+                }
+
+            }
+
+        }
+        return cows;
+    }
+
+
 
     public int getBullsComputer(int[] computerGuess, int[] playerSecreteNumber) {
         int bullsComputer = 0;
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < max_digits; i++) {
             if(playerGuess[i] == computerSecreteNumber[i]){
                 bullsComputer++;
             }
@@ -98,15 +222,11 @@ public class EasyAI extends PlayerOnlyGuess {
         return bullsComputer;
     }
 
-    @Override
-    public int getCows(int[] playerGuess, int[] computerSecreteNumber) {
-        return super.getCows(playerGuess, computerSecreteNumber);
-    }
 
     public int getCowsComputer(int[] computerGuess, int[] playerSecreteNumber) {
         int cowsComputer = 0;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < max_digits; i++) {
+            for (int j = 0; j < max_digits; j++) {
                 if((i != j) && playerGuess[i] == computerSecreteNumber[j]){
                     cowsComputer++;
                 }
