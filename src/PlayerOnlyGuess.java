@@ -43,15 +43,28 @@ public class PlayerOnlyGuess {
         while(!valid) {
             try {
                 playerGuessstr = Keyboard.readInput();
+
                 int temp = Integer.parseInt(playerGuessstr);
 
                 if (playerGuessstr.length() < 4) {
                     System.out.println("Enter 4 digits numbers!");
                     valid = true;
                 }
+
+                for (int i = 0; i < 4; i++) {
+                    for (int j = 0; j < 4; j++) {
+                        if(playerGuessstr.charAt(i) == playerGuessstr.charAt(j)){
+                            valid = true;
+                            throw new SameNumberException("No same numbers!");
+
+                        }
+                    }
+
+                }
+
                 break;
 
-            } catch (StringIndexOutOfBoundsException | NumberFormatException e) {
+            } catch (StringIndexOutOfBoundsException | NumberFormatException | SameNumberException e) {
                 System.out.println("Error: " + e.getMessage());
                 valid = true;
 
@@ -59,7 +72,10 @@ public class PlayerOnlyGuess {
         }
         int[] playerGuess = new int[4];
         for (int j = 0; j <4; j++) {
-            playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));}
+            playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
+
+        }
+
         return playerGuess;
     }
 
