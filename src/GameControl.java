@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Locale;
 
 public class GameControl {
@@ -22,44 +23,36 @@ public class GameControl {
 
         while(!valid) {
 
-            try {
-
                 level = Keyboard.readInput().toLowerCase();
                 switch (level) {
                     case "playeronly":
                     case "1":
                         only = new PlayerOnlyGuess();
+                        valid = true;
                         break;
                     case "easy":
                     case "2":
                         only = new EasyAI();
+                        valid = true;
                         break;
                     case "medium":
                     case "3":
                         only = new MediumAI();
+                        valid = true;
                         break;
                     case "hard":
                     case "4":
                         only = new HardAI();
+                        valid = true;
                         break;
+                    default:
+                        System.out.println("Invalid command! ");
+                        System.out.println("Choose level: ");
                 }
-                valid = true;
-
-                /*if (num <= 4 && num > 0){
-                    valid = true;
-                }else{
-                    System.out.println("Choose between 1-4 or proper level! ");
-                }*/
-
-
-            } catch (NullPointerException e) {
-                System.out.println("Unrecognized command, please enter again!");
-                valid = false;
-            }
-
 
         }
         only.start();
+
 
 
     }
