@@ -29,9 +29,9 @@ public class PlayerOnlyGuess {
             computerSecreteNumber[i] = list.get(i);
         }
 
-        //for(Integer element : computerSecreteNumber){
-            //System.out.println(element);
-        //}
+        for(Integer element : computerSecreteNumber){
+            System.out.println(element);
+        }
 
         return computerSecreteNumber;
 
@@ -48,12 +48,12 @@ public class PlayerOnlyGuess {
 
                 if (playerGuessstr.length() < 4) {
                     System.out.println("Enter 4 digits numbers!");
-                    valid = true;
+                    valid = false;
                 }
 
                 for (int i = 0; i < 4; i++) {
                     for (int j = 0; j < 4; j++) {
-                        if(playerGuessstr.charAt(i) == playerGuessstr.charAt(j)){
+                        if( (i != j) && playerGuessstr.charAt(i) == playerGuessstr.charAt(j)){
                             valid = true;
                             throw new SameNumberException("No same numbers!");
 
@@ -62,11 +62,11 @@ public class PlayerOnlyGuess {
 
                 }
 
-                break;
+                valid = true;
 
             } catch (StringIndexOutOfBoundsException | NumberFormatException | SameNumberException e) {
                 System.out.println("Error: " + e.getMessage());
-                valid = true;
+                valid = false;
 
             }
         }
