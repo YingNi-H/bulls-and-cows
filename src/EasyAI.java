@@ -5,7 +5,7 @@ import java.util.List;
 public class EasyAI extends PlayerOnlyGuess {
 
         public static int max_turn;
-        public static int max_digits;
+        public static int ints;
 
 
 
@@ -40,8 +40,8 @@ public class EasyAI extends PlayerOnlyGuess {
         while(true){
             try{
 
-                max_digits = Integer.parseInt(Keyboard.readInput());
-                if(max_digits == 4 || max_digits == 6){
+                ints = Integer.parseInt(Keyboard.readInput());
+                if(ints == 4 || ints == 6){
                     break;
                 }else{
                     System.out.println("Choose 4 or 6! Try again >> ");
@@ -63,8 +63,8 @@ public class EasyAI extends PlayerOnlyGuess {
 
         Collections.shuffle(list);
 
-        int[] computerSecreteNumber = new int[max_digits];
-        for (int i = 0; i < max_digits; i++) {
+        int[] computerSecreteNumber = new int[ints];
+        for (int i = 0; i < ints; i++) {
             computerSecreteNumber[i] = list.get(i);
         }
 
@@ -95,12 +95,12 @@ public class EasyAI extends PlayerOnlyGuess {
 
                 int temp = Integer.parseInt(playerGuessstr);
 
-                if ((playerGuessstr.length()) != max_digits) {
-                    throw new StringIndexOutOfBoundsException(max_digits + " digits numbers!");
+                if ((playerGuessstr.length()) != ints) {
+                    throw new StringIndexOutOfBoundsException(ints + " digits numbers!");
                 }
 
-                for (int i = 0; i < max_digits; i++) {
-                    for (int j = 0; j < max_digits; j++) {
+                for (int i = 0; i < ints; i++) {
+                    for (int j = 0; j < ints; j++) {
                         if( (i != j) && playerGuessstr.charAt(i) == playerGuessstr.charAt(j)){
 
                             throw new SameNumberException("No same numbers!");
@@ -115,8 +115,8 @@ public class EasyAI extends PlayerOnlyGuess {
 
             }
         }
-        int[] playerGuess = new int[max_digits];
-        for (int j = 0; j < max_digits; j++) {
+        int[] playerGuess = new int[ints];
+        for (int j = 0; j < ints; j++) {
             playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
 
         }
@@ -169,14 +169,14 @@ public class EasyAI extends PlayerOnlyGuess {
 
     public void printEachResult(int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
         System.out.println("Your guess: " );
-        for (int i = 0; i < max_digits; i++) {
+        for (int i = 0; i < ints; i++) {
             System.out.print(playerGuess[i]);
 
         }
         System.out.println();
         System.out.println("Results: " + bulls + " bulls " + cows + " cows") ;
         System.out.println("Computer guess: " );
-        for (int i = 0; i < max_digits; i++) {
+        for (int i = 0; i < ints; i++) {
             System.out.print(computerGuess[i]);
 
         }
@@ -188,7 +188,7 @@ public class EasyAI extends PlayerOnlyGuess {
 
     public int getBulls(int[] playerGuess, int[] computerSecreteNumber){
         int bulls = 0;
-        for (int i = 0; i < max_digits; i++) {
+        for (int i = 0; i < ints; i++) {
             if(playerGuess[i] == computerSecreteNumber[i]){
                 bulls++;
             }
@@ -198,8 +198,8 @@ public class EasyAI extends PlayerOnlyGuess {
 
     public int getCows(int[] playerGuess, int[] computerSecreteNumber){
         int cows = 0;
-        for (int i = 0; i < max_digits; i++) {
-            for (int j = 0; j < max_digits; j++) {
+        for (int i = 0; i < ints; i++) {
+            for (int j = 0; j < ints; j++) {
                 if((i != j) && playerGuess[i] == computerSecreteNumber[j]){
                     cows++;
                 }
@@ -214,7 +214,7 @@ public class EasyAI extends PlayerOnlyGuess {
 
     public int getBullsComputer(int[] computerGuess, int[] playerSecreteNumber) {
         int bullsComputer = 0;
-        for (int i = 0; i < max_digits; i++) {
+        for (int i = 0; i < ints; i++) {
             if(playerGuess[i] == computerSecreteNumber[i]){
                 bullsComputer++;
             }
@@ -225,8 +225,8 @@ public class EasyAI extends PlayerOnlyGuess {
 
     public int getCowsComputer(int[] computerGuess, int[] playerSecreteNumber) {
         int cowsComputer = 0;
-        for (int i = 0; i < max_digits; i++) {
-            for (int j = 0; j < max_digits; j++) {
+        for (int i = 0; i < ints; i++) {
+            for (int j = 0; j < ints; j++) {
                 if((i != j) && playerGuess[i] == computerSecreteNumber[j]){
                     cowsComputer++;
                 }
