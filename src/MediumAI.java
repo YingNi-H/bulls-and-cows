@@ -1,11 +1,12 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
+import java.util.*;
 
 
 public class MediumAI extends EasyAI{
+    private List<int[]> cG;
+
+    public MediumAI(){
+         this.cG = new ArrayList<>();
+    }
 
 
     public void start() {
@@ -109,17 +110,25 @@ public class MediumAI extends EasyAI{
             System.out.println(element);
         }
 
-        List<int[]> cG = new ArrayList<>();
+
 
         cG.add(computerGuess);
         System.out.println(cG.get(0) + "size:" + cG.size());
+        for(int i= 0; i< cG.size(); i++){
+            if(cG.get(i).equals(cG.get(i+1))){
+                cG.remove(cG.get(i+1));
+                cG.add(computerGuess);
 
+            }
+        }
 
 
 
         return computerGuess;
 
     }
+
+
 
 
 
