@@ -2,7 +2,7 @@ import java.util.*;
 
 
 public class MediumAI extends EasyAI{
-    private List<int[]> cG;
+    protected List<int[]> cG;
 
     public MediumAI(){
          this.cG = new ArrayList<>();
@@ -111,9 +111,6 @@ public class MediumAI extends EasyAI{
         }
 
 
-        //cG.add(cG.size(), computerGuess);
-
-
         for(int i= 0; i< cG.size()-1; i++){
             if(Arrays.equals(cG.get(i), cG.get(i+1))){
                 cG.remove(cG.get(i+1));
@@ -121,7 +118,15 @@ public class MediumAI extends EasyAI{
             }
         }
         cG.add(computerGuess);
-        System.out.println(cG.get(0) + "size:" + cG.size());
+
+        for(int i = 0; i < cG.size(); i++){
+            int[] cGuess = cG.get(i);
+            for (int j = 0; j < cGuess.length; j++) {
+                System.out.print(cGuess[j] );
+            }
+            System.out.println( "size:" + cG.size());
+
+        }
 
 
 
