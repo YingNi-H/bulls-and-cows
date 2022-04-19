@@ -112,15 +112,16 @@ public class MediumAI extends EasyAI{
 
 
 
-        cG.add(computerGuess);
-        System.out.println(cG.get(0) + "size:" + cG.size());
+
         for(int i= 0; i< cG.size(); i++){
-            if(cG.get(i).equals(cG.get(i+1))){
+            if(Arrays.equals(cG.get(i), cG.get(i+1))){
                 cG.remove(cG.get(i+1));
-                cG.add(computerGuess);
+                //cG.add(computerGuess);
 
             }
         }
+        cG.add(computerGuess);
+        System.out.println(cG.get(0) + "size:" + cG.size());
 
 
 
