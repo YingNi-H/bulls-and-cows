@@ -4,8 +4,29 @@ import java.util.List;
 
 public class EasyAI extends PlayerOnlyGuess {
 
-        public static int max_turn;
-        public static int ints;
+        protected static int max_turn;
+        protected static int ints;
+        protected List<String> result;
+        protected String s;
+    protected int bulls;
+    protected int cows;
+    protected int[] playerGuess;
+    protected int bullsComputer;
+    protected int cowsComputer;
+    protected int[] computerGuess;
+
+        public EasyAI(){
+            this.result = result;
+            this.bulls = bulls;
+            this.cows = cows;
+            this.playerGuess = playerGuess;
+            this.bullsComputer = bullsComputer;
+            this.cowsComputer = cowsComputer;
+            this.computerGuess = computerGuess;
+            this.s = s;
+
+        }
+
 
 
 
@@ -167,7 +188,7 @@ public class EasyAI extends PlayerOnlyGuess {
     }
 
 
-    public void printEachResult(int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
+    public List<String> printEachResult(int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
         System.out.println("Your guess: " );
         for (int i = 0; i < ints; i++) {
             System.out.print(playerGuess[i]);
@@ -184,7 +205,20 @@ public class EasyAI extends PlayerOnlyGuess {
         System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
         System.out.println("----------");
 
+        String s = ("Your guess: " + playerGuess[0] + + playerGuess[1] + + playerGuess[2] + + playerGuess[3] +
+                "Results: " + bulls + " bulls " + cows + " cows" +
+                "Computer guess: "+ computerGuess[0] + + computerGuess[1] + + computerGuess[2] + + computerGuess[3] +
+                "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
+        List<String> result = new ArrayList<>();
+        result.add(s);
+
+        return result;
+
     }
+
+
+
+
 
     public int getBulls(int[] playerGuess, int[] computerSecreteNumber){
         int bulls = 0;

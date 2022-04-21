@@ -180,7 +180,7 @@ public class MediumAI extends EasyAI{
         }
 
 
-        public void printEachResult(int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
+        public List<String> printEachResult(int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
             System.out.println("Your guess: " );
             for (int i = 0; i < 4; i++) {
                 System.out.print(playerGuess[i]);
@@ -196,6 +196,8 @@ public class MediumAI extends EasyAI{
             System.out.println();
             System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
             System.out.println("----------");
+
+            return null;
 
         }
 
