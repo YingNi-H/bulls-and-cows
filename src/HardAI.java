@@ -2,8 +2,16 @@
 import java.util.*;
 
 public class HardAI extends MediumAI{
+
+
+    private int bullsComputer;
+    private int cowsComputer;
+
     public HardAI() {
+
         super();
+        this.bullsComputer= bullsComputer;
+        this.cowsComputer= cowsComputer;
     }
 
 
@@ -12,12 +20,13 @@ public class HardAI extends MediumAI{
 
         int[] computerSecreteNumber = setComputerSecreteNumber();
 
-        int[] computerGuess = getComputerGuess();
+        List<int[]> combinations = printUnique ();
+
+        //int[] computerGuess = getComputerStrategy(combinations, computerCalculations, playerSecreteNumber);
+
+        game(computerSecreteNumber, playerSecreteNumber,combinations);
 
 
-        game(computerSecreteNumber, playerSecreteNumber);
-
-       gameStrategy(computerSecreteNumber, playerSecreteNumber, computerGuess);
     }
 
     @Override
@@ -35,44 +44,113 @@ public class HardAI extends MediumAI{
         return super.getPlayerGuess();
     }
 
-    public int[] getComputerGuess() {
-        List<Integer> list = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-            list.add(i);
+
+    public List<int[]> printUnique () {
+
+        List<int[]> combinations = new ArrayList<>();
+        int[] computerCalculations = new int[4];
+
+        int l = 999, r = 10000;
+        int i = 0;
+        for (i = l; i <= r; i++) {
+            int num = i;
+            boolean[] visited = new boolean[10];
+
+            while (num != 0) {
+                if (visited[num % 10]) {
+                    break;
+                }
+                visited[num % 10] = true;
+                num = num / 10;
+            }
+
+            if (num == 0) {
+                int counter = 3;
+                int a = i;
+                computerCalculations = new int[4];
+                for (counter = 3; counter >= 0; counter--) {
+                    computerCalculations[counter] = a % 10;
+                    a = a / 10;
+
+                }
+                combinations.add(computerCalculations);
+
+            }
+
         }
 
-        Collections.shuffle(list);
+        return combinations;
 
-        int[] computerGuess = new int[4];
-        for (int i = 0; i < 4; i++) {
-            computerGuess[i] = list.get(i);
-        }
-
-        for(Integer element : computerGuess){
-            System.out.println(element);
-        }
-
-        return computerGuess;
     }
 
 
-    public void game(int[] computerSecreteNumber, int[] playerSecreteNumber) {
+    public int[] getComputerGuess(List<int[]> combinations){
+        int[] computerGuess = new int[0];
+
+
+        Collections.shuffle(combinations);
+
+        computerGuess = combinations.get(0);
+        return computerGuess;
+
+
+    }
+
+    public List<int[]> getComputerStrategy(int bullsComputer , int cowsComputer, List<int[]> combinations, int[] playerSecreteNumber){
+
+
+
+        int[] bullAndCowComputerGuess = new int[]{bullsComputer, cowsComputer};
+//        bullAndCowComputerGuess[0] = getBullsComputer(computerGuess,playerSecreteNumber);
+//        bullAndCowComputerGuess[1] = getCowsComputer(computerGuess,playerSecreteNumber);
+
+
+        //combinations.remove(computerGuess);
+        //System.out.println("Size: " + combinations.size());
+
+
+        Iterator<int[]> bullCowAnalysis = combinations.iterator();
+        while(bullCowAnalysis.hasNext()){
+            int[] element = bullCowAnalysis.next();
+            int[] bullAndCow = new int[2];
+            bullAndCow[0] = getBullsComputer(element,playerSecreteNumber);
+            bullAndCow[1] = getCowsComputer(element,playerSecreteNumber);
+            if(!(Arrays.equals(bullAndCow, bullAndCowComputerGuess))){
+                bullCowAnalysis.remove();
+            }
+
+        }
+
+        System.out.println("Combinations size: " + combinations.size());
+
+
+        return combinations;
+
+    }
+
+
+
+
+    public void game(int[] computerSecreteNumber, int[] playerSecreteNumber, List<int[]> combinations) {
         boolean win = false;
         boolean winCom = false;
         int counter = 0;
 
 
-        while (counter < 1 ) {
+        while(counter < 7 ){
             System.out.print("Enter your guess > ");
             int [] playerGuess = getPlayerGuess();
             counter++;
             int bulls = getBulls(playerGuess, computerSecreteNumber);
             int cows= getCows(playerGuess, computerSecreteNumber);
-            int [] computerGuess = getComputerGuess();
+
+            int [] computerGuess = getComputerGuess(combinations);
+
 
             int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
             int cowsComputer= getCows(computerGuess, playerSecreteNumber);
             printEachResult(bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
+
             win = winPlayer(playerGuess, computerSecreteNumber);
             winCom = winComputer(computerGuess, playerSecreteNumber);
             if(win){
@@ -82,96 +160,21 @@ public class HardAI extends MediumAI{
                 System.out.println("Computer win!");
                 break;
             }
+            getComputerStrategy(bullsComputer ,cowsComputer,combinations, playerSecreteNumber);
+            System.out.println(combinations.size());
 
-        }
-
-
-    }
-
-    public void gameStrategy(int[] computerSecreteNumber, int[] playerSecreteNumber, int[] computerGuess) {
-        boolean win = false;
-        boolean winCom = false;
-        int counter = 0;
-
-
-        while (counter < 6  ) {
-            System.out.print("Enter your guess > ");
-            int [] playerGuess = getPlayerGuess();
-            counter++;
-            int bulls = getBulls(playerGuess, computerSecreteNumber);
-            int cows= getCows(playerGuess, computerSecreteNumber);
-
-
-            int[] computerCalculations = getComputerStrategy(computerGuess);
-
-
-
-            int bullsComputerStrategy = getBulls(computerCalculations, playerSecreteNumber);
-            int cowsComputerStrategy= getCows(computerCalculations, playerSecreteNumber);
-
-            printEachResultStrategy(bulls, cows, playerGuess, bullsComputerStrategy, cowsComputerStrategy, computerCalculations);
-
-            win = winPlayer(playerGuess, computerSecreteNumber);
-            winCom = winComputerStrategy(computerCalculations, playerSecreteNumber);
-
-            if(win){
-                System.out.println("Congratulation! You win!");
-                break;
-            }else if(winCom){
-                System.out.println("Computer win!");
-                break;
-            }
 
         }
         if((!win) && (!winCom) ){System.out.println("Draw! You and computer didn't get it!");}
 
+
+
+
     }
 
-    public int[] getComputerStrategy(int[] computerGuess) {
-        int[] computerCalculations = {0,9,8,7};
-
-        /*List<Integer> allPossibles = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            allPossibles.add(computerGuess[i]);
-        }
-        System.out.println("allPossibles: ");
-        for(Integer element : allPossibles){
-            System.out.print( element);
-        }
-
-        int[] combinations = new int[4];
-        for (int i = 0; i < 10; i++) {
-
-            combinations[i] = i;
-
-        }
-        for(Integer in : combinations){
-            System.out.println(in);
-        }
-
-        computerCalculations = new int[0];
 
 
 
-
-        for(int i= 0; i< cG.size()-1; i++){
-            if(Arrays.equals(cG.get(i), cG.get(i+1))){
-                cG.remove(cG.get(i+1));
-
-            }
-        }
-        cG.add(computerGuess);
-
-        for(int i = 0; i < cG.size(); i++){
-            int[] cGuess = cG.get(i);
-            for (int j = 0; j < cGuess.length; j++) {
-                System.out.print(cGuess[j] );
-            }
-            System.out.println( "size:" + cG.size());
-
-        }*/
-        return computerCalculations;
-    }
 
     @Override
     public boolean winPlayer(int[] playerGuess, int[] computerSecreteNumber) {
@@ -184,9 +187,7 @@ public class HardAI extends MediumAI{
     }
 
 
-    public boolean winComputerStrategy(int[] computerCalculations, int[] playerSecreteNumber) {
-        return super.winComputer(computerCalculations, playerSecreteNumber);
-    }
+
 
 
     @Override
@@ -212,10 +213,7 @@ public class HardAI extends MediumAI{
     }
 
 
-    public void printEachResultStrategy(int bulls, int cows, int[] playerGuess, int bullsComputerStrategy, int cowsComputerStrategy, int[] computerCalculations) {
-        super.printEachResult(bulls, cows, playerGuess, bullsComputerStrategy, cowsComputerStrategy, computerCalculations);
 
-    }
 
     @Override
     public int getBulls(int[] playerGuess, int[] computerSecreteNumber) {
@@ -229,21 +227,23 @@ public class HardAI extends MediumAI{
 
     @Override
     public int getBullsComputer(int[] computerGuess, int[] playerSecreteNumber) {
-        return super.getBullsComputer(computerGuess, playerSecreteNumber);
+        int bullsComputer = 0;
+        for (int i = 0; i < 4; i++) {
+            if(playerGuess[i] == computerSecreteNumber[i]){
+                bullsComputer++;
+            }
+        }
+        return bullsComputer;
     }
 
 
-    public int getBullsComputerStrategy(int[] computerCalculations, int[] playerSecreteNumber) {
-        return super.getBullsComputer(computerCalculations, playerSecreteNumber);
-    }
+
 
     @Override
     public int getCowsComputer(int[] computerGuess, int[] playerSecreteNumber) {
         return super.getCowsComputer(computerGuess, playerSecreteNumber);
     }
 
-    public int getCowsComputerStrategy(int[] computerCalculations, int[] playerSecreteNumber) {
-        return super.getCowsComputer(computerCalculations, playerSecreteNumber);
-    }
+
 }
 
