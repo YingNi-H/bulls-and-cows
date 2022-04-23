@@ -19,10 +19,7 @@ public class MediumAI extends EasyAI{
 
             game(computerSecreteNumber, playerSecreteNumber);
 
-
         }
-
-
 
 
         public int[] setComputerSecreteNumber() {
@@ -38,9 +35,9 @@ public class MediumAI extends EasyAI{
                 computerSecreteNumber[i] = list.get(i);
             }
 
-        for(Integer element : computerSecreteNumber){
-            System.out.println(element);
-        }
+//        for(Integer element : computerSecreteNumber){
+//            System.out.println(element);
+//        }
 
             return computerSecreteNumber;
 
@@ -108,9 +105,9 @@ public class MediumAI extends EasyAI{
             computerGuess[i] = list.get(i);
         }
 
-        for(Integer element : computerGuess){
-            System.out.println(element);
-        }
+//        for(Integer element : computerGuess){
+//            System.out.println(element);
+//        }
 
 
         for(int i= 0; i< cG.size()-1; i++){
@@ -121,23 +118,18 @@ public class MediumAI extends EasyAI{
         }
         cG.add(computerGuess);
 
-        for(int i = 0; i < cG.size(); i++){
-            int[] cGuess = cG.get(i);
-            for (int j = 0; j < cGuess.length; j++) {
-                System.out.print(cGuess[j] );
-            }
-            System.out.println( "size:" + cG.size());
-
-        }
-
-
+//        for(int i = 0; i < cG.size(); i++){
+//            int[] cGuess = cG.get(i);
+//            for (int j = 0; j < cGuess.length; j++) {
+//                System.out.print(cGuess[j] );
+//            }
+//            System.out.println( "size:" + cG.size());
+//
+//        }
 
         return computerGuess;
 
     }
-
-
-
 
 
         public void game(int[] computerSecreteNumber, int[] playerSecreteNumber) {

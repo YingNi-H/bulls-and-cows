@@ -33,6 +33,7 @@ public class EasyAI extends PlayerOnlyGuess {
     @Override
     public void start() {
         configurations();
+
         int[] playerSecreteNumber =setPlayerSecreteNumber();
 
         int[] computerSecreteNumber = setComputerSecreteNumber();
@@ -57,6 +58,7 @@ public class EasyAI extends PlayerOnlyGuess {
                 System.out.println("Not a valid number! Try again >> ");
             }
         }
+
         System.out.println("Please choose maximum digits 4 or 6: ");
         while(true){
             try{
@@ -71,7 +73,6 @@ public class EasyAI extends PlayerOnlyGuess {
                 System.out.println("Not a valid number! Try again >> ");
             }
        }
-
 
     }
 
@@ -89,14 +90,13 @@ public class EasyAI extends PlayerOnlyGuess {
             computerSecreteNumber[i] = list.get(i);
         }
 
-        for(Integer element : computerSecreteNumber){
-            System.out.println(element);
-        }
+//        for(Integer element : computerSecreteNumber){
+//            System.out.println(element);
+//        }
 
         return computerSecreteNumber;
 
     }
-
 
 
     public int[] setPlayerSecreteNumber(){

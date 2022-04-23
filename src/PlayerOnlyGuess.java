@@ -29,9 +29,9 @@ public class PlayerOnlyGuess {
             computerSecreteNumber[i] = list.get(i);
         }
 
-        for(Integer element : computerSecreteNumber){
-            System.out.println(element);
-        }
+//        for(Integer element : computerSecreteNumber){
+//            System.out.println(element);
+//        }
 
         return computerSecreteNumber;
 
@@ -84,12 +84,12 @@ public class PlayerOnlyGuess {
         boolean win = false;
         int counter =0;
         System.out.println("Please enter your guess: ");
-            while (counter < 3 ) {
+            while (counter < 7 ) {
                 int [] playerGuess = getPlayerGuess();
                 counter++;
                 int bulls = getBulls(playerGuess, computerSecreteNumber);
                 int cows= getCows(playerGuess, computerSecreteNumber);
-                printEachResult(bulls, cows, playerGuess);
+                printEachResult(counter, bulls, cows, playerGuess);
                 win = winPlayer(playerGuess, computerSecreteNumber);
                 if(win){
                     System.out.println("Congratulation! You win!");
@@ -108,8 +108,8 @@ public class PlayerOnlyGuess {
         return Arrays.equals(playerGuess, computerSecreteNumber);
     }
 
-    public void printEachResult(int bulls, int cows, int[] playerGuess){
-        System.out.println("Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
+    public void printEachResult(int counter, int bulls, int cows, int[] playerGuess){
+        System.out.println("Turn "+ counter + " -Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
         System.out.println("Results: " + bulls + " bulls " + cows + " cows") ;
         System.out.println("-----");
     }
