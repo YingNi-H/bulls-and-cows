@@ -89,9 +89,9 @@ public class EasyAI extends PlayerOnlyGuess {
             computerSecreteNumber[i] = list.get(i);
         }
 
-//        for(Integer element : computerSecreteNumber){
-//            System.out.println(element);
-//        }
+        for(Integer element : computerSecreteNumber){
+            System.out.println(element);
+        }
 
         return computerSecreteNumber;
 
@@ -249,7 +249,7 @@ public class EasyAI extends PlayerOnlyGuess {
     public int getBullsComputer(int[] computerGuess, int[] playerSecreteNumber) {
         int bullsComputer = 0;
         for (int i = 0; i < ints; i++) {
-            if(playerGuess[i] == computerSecreteNumber[i]){
+            if(computerGuess[i] == playerSecreteNumber[i]){
                 bullsComputer++;
             }
         }
@@ -261,7 +261,7 @@ public class EasyAI extends PlayerOnlyGuess {
         int cowsComputer = 0;
         for (int i = 0; i < ints; i++) {
             for (int j = 0; j < ints; j++) {
-                if((i != j) && playerGuess[i] == computerSecreteNumber[j]){
+                if((i != j) && computerGuess[i] == playerSecreteNumber[j]){
                     cowsComputer++;
                 }
 

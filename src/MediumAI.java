@@ -230,7 +230,7 @@ public class MediumAI extends EasyAI{
         public int getBullsComputer(int[] computerGuess, int[] playerSecreteNumber) {
             int bullsComputer = 0;
             for (int i = 0; i < 4; i++) {
-                if(playerGuess[i] == computerSecreteNumber[i]){
+                if(computerGuess[i] == playerSecreteNumber[i]){
                     bullsComputer++;
                 }
             }
@@ -242,7 +242,7 @@ public class MediumAI extends EasyAI{
             int cowsComputer = 0;
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
-                    if((i != j) && playerGuess[i] == computerSecreteNumber[j]){
+                    if((i != j) && computerGuess[i] == playerSecreteNumber[j]){
                         cowsComputer++;
                     }
 
