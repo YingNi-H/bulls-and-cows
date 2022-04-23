@@ -3,6 +3,8 @@ import java.util.*;
 
 public class MediumAI extends EasyAI{
     protected List<int[]> cG;
+    protected List<String> result;
+    protected String s;
 
     public MediumAI(){
          this.cG = new ArrayList<>();
@@ -36,9 +38,9 @@ public class MediumAI extends EasyAI{
                 computerSecreteNumber[i] = list.get(i);
             }
 
-//        for(Integer element : computerSecreteNumber){
-//            System.out.println(element);
-//        }
+        for(Integer element : computerSecreteNumber){
+            System.out.println(element);
+        }
 
             return computerSecreteNumber;
 
@@ -153,7 +155,7 @@ public class MediumAI extends EasyAI{
 
                 int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
                 int cowsComputer= getCows(computerGuess, playerSecreteNumber);
-                printEachResult(bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
+                printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
                 win = winPlayer(playerGuess, computerSecreteNumber);
                 winCom = winComputer(computerGuess, playerSecreteNumber);
                 if(win){
@@ -180,8 +182,8 @@ public class MediumAI extends EasyAI{
         }
 
 
-        public List<String> printEachResult(int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
-            System.out.println("Your guess: " );
+        public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
+            System.out.println("Turn "+ counter + " -Your guess: ");
             for (int i = 0; i < 4; i++) {
                 System.out.print(playerGuess[i]);
 
@@ -197,7 +199,14 @@ public class MediumAI extends EasyAI{
             System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
             System.out.println("----------");
 
-            return null;
+            String s = ("Turn "+ counter + " -Your guess: " + playerGuess[0] + + playerGuess[1] + + playerGuess[2] + + playerGuess[3] +
+                    "Results: " + bulls + " bulls " + cows + " cows" +
+                    "Computer guess: "+ computerGuess[0] + + computerGuess[1] + + computerGuess[2] + + computerGuess[3] +
+                    "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
+            List<String> result = new ArrayList<>();
+            result.add(s);
+
+            return result;
 
         }
 

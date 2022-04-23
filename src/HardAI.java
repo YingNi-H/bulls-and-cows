@@ -2,14 +2,12 @@
 import java.util.*;
 
 public class HardAI extends MediumAI{
-    //private List<int[]> combinations;
-
 
 
     public HardAI() {
 
         super();
-        //this.combinations = combinations;
+
 
     }
 
@@ -21,7 +19,6 @@ public class HardAI extends MediumAI{
 
         List<int[]> combinations = printUnique ();
 
-        //int[] computerGuess = getComputerStrategy(combinations, computerCalculations, playerSecreteNumber);
 
         game(computerSecreteNumber, playerSecreteNumber,combinations);
 
@@ -85,33 +82,21 @@ public class HardAI extends MediumAI{
 
     public int[] getComputerGuess(List<int[]> combinations, int[] playerSecreteNumber ){
         int[] computerGuess = new int[0];
-        System.out.println("computerGuess: "+combinations.size());
-
-//        if(combinations.size() < 4536) {
-//        combinations = getComputerStrategy(computerGuess, combinations, playerSecreteNumber);
-//        }
-
+        //System.out.println("computerGuess: "+combinations.size());
 
         Collections.shuffle(combinations);
 
         computerGuess = combinations.get(0);
         return computerGuess;
 
-
     }
 
     public List<int[]> getComputerStrategy(int[] computerGuess, List<int[]> combinations, int[] playerSecreteNumber){
-        System.out.println("Before each remove: "+combinations.size());
-
-
+        //System.out.println("Before each remove: "+combinations.size());
 
         int[] bullAndCowComputerGuess = new int[2];
         bullAndCowComputerGuess[0] = getBullsComputer(computerGuess,playerSecreteNumber);
         bullAndCowComputerGuess[1] = getCowsComputer(computerGuess,playerSecreteNumber);
-
-
-        //combinations.remove(computerGuess);
-        //System.out.println("Size: " + combinations.size());
 
         Iterator<int[]> bullCowAnalysis = combinations.iterator();
         while(bullCowAnalysis.hasNext()){
@@ -124,11 +109,7 @@ public class HardAI extends MediumAI{
             }
 
         }
-
-        System.out.println("Combinations size after remove: " + combinations.size());
-
-
-
+        //System.out.println("Combinations size after remove: " + combinations.size());
         return combinations;
 
     }
@@ -149,13 +130,11 @@ public class HardAI extends MediumAI{
             int cows= getCows(playerGuess, computerSecreteNumber);
 
 
-
             int [] computerGuess = getComputerGuess(combinations, playerSecreteNumber);
-
 
             int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
             int cowsComputer= getCows(computerGuess, playerSecreteNumber);
-            printEachResult(bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
+            printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
 
             win = winPlayer(playerGuess, computerSecreteNumber);
             winCom = winComputer(computerGuess, playerSecreteNumber);
@@ -168,18 +147,13 @@ public class HardAI extends MediumAI{
             }
             combinations= getComputerStrategy(computerGuess ,combinations, playerSecreteNumber);
 
-            System.out.println(combinations.size());
-
+            //System.out.println(combinations.size());
 
         }
         if((!win) && (!winCom) ){System.out.println("Draw! You and computer didn't get it!");}
 
 
-
-
     }
-
-
 
 
 
@@ -191,6 +165,7 @@ public class HardAI extends MediumAI{
     @Override
     public boolean winComputer(int[] computerGuess, int[] playerSecreteNumber) {
         return super.winComputer(computerGuess, playerSecreteNumber);
+
     }
 
 
@@ -198,25 +173,8 @@ public class HardAI extends MediumAI{
 
 
     @Override
-    public List<String> printEachResult(int bulls, int cows, int[] playerGuess, int bullsComputer, int cowsComputer, int[] computerGuess) {
-        System.out.println("Your guess: " );
-        for (int i = 0; i < 4; i++) {
-            System.out.print(playerGuess[i]);
-
-        }
-        System.out.println();
-        System.out.println("Results: " + bulls + " bulls " + cows + " cows") ;
-        System.out.println("Computer guess: " );
-        for (int i = 0; i < 4; i++) {
-            System.out.print(computerGuess[i]);
-
-        }
-        System.out.println();
-        System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
-        System.out.println("----------");
-
-
-        return null;
+    public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess, int bullsComputer, int cowsComputer, int[] computerGuess) {
+        return super.printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
     }
 
 
@@ -234,31 +192,16 @@ public class HardAI extends MediumAI{
 
     @Override
     public int getBullsComputer(int[] computerGuess, int[] playerSecreteNumber) {
-        int bullsComputer = 0;
-        for (int i = 0; i < 4; i++) {
-            if(computerGuess[i] == playerSecreteNumber[i]){
-                bullsComputer++;
-            }
-        }
-        return bullsComputer;
-    }
 
+        return super.getBullsComputer(computerGuess, playerSecreteNumber);
+    }
 
 
 
     @Override
     public int getCowsComputer(int[] computerGuess, int[] playerSecreteNumber) {
-            int cowsComputer = 0;
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
-                    if((i != j) && computerGuess[i] == playerSecreteNumber[j]){
-                        cowsComputer++;
-                    }
 
-                }
-
-            }
-            return cowsComputer;
+            return super.getCowsComputer(computerGuess, playerSecreteNumber);
 
     }
 
