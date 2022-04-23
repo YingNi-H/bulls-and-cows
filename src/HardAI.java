@@ -2,14 +2,14 @@
 import java.util.*;
 
 public class HardAI extends MediumAI{
-    //private int[] computerGuess;
+    //private List<int[]> combinations;
 
 
 
     public HardAI() {
 
         super();
-        //this.computerGuess = computerGuess;
+        //this.combinations = combinations;
 
     }
 
@@ -85,10 +85,11 @@ public class HardAI extends MediumAI{
 
     public int[] getComputerGuess(List<int[]> combinations, int[] playerSecreteNumber ){
         int[] computerGuess = new int[0];
+        System.out.println("computerGuess: "+combinations.size());
 
-        if(combinations.size() < 4536) {
-        combinations = getComputerStrategy(computerGuess, combinations, playerSecreteNumber);
-        }
+//        if(combinations.size() < 4536) {
+//        combinations = getComputerStrategy(computerGuess, combinations, playerSecreteNumber);
+//        }
 
 
         Collections.shuffle(combinations);
@@ -100,6 +101,7 @@ public class HardAI extends MediumAI{
     }
 
     public List<int[]> getComputerStrategy(int[] computerGuess, List<int[]> combinations, int[] playerSecreteNumber){
+        System.out.println("Before each remove: "+combinations.size());
 
 
 
@@ -115,15 +117,15 @@ public class HardAI extends MediumAI{
         while(bullCowAnalysis.hasNext()){
             int[] element = bullCowAnalysis.next();
             int[] bullAndCow = new int[2];
-            bullAndCow[0] = getBullsComputer(element,playerSecreteNumber);
-            bullAndCow[1] = getCowsComputer(element,playerSecreteNumber);
+            bullAndCow[0] = getBullsComputer(element,computerGuess);
+            bullAndCow[1] = getCowsComputer(element,computerGuess);
             if(!(Arrays.equals(bullAndCow, bullAndCowComputerGuess))){
                  bullCowAnalysis.remove();
             }
 
         }
 
-        System.out.println("Combinations size: " + combinations.size());
+        System.out.println("Combinations size after remove: " + combinations.size());
 
 
 
@@ -233,8 +235,8 @@ public class HardAI extends MediumAI{
     @Override
     public int getBullsComputer(int[] computerGuess, int[] playerSecreteNumber) {
         int bullsComputer = 0;
-        for (int b = 0; b < 4; b++) {
-            if(computerGuess[b] == playerSecreteNumber[b]){
+        for (int i = 0; i < 4; i++) {
+            if(computerGuess[i] == playerSecreteNumber[i]){
                 bullsComputer++;
             }
         }
