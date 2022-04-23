@@ -46,6 +46,8 @@ public class HardAI extends MediumAI{
         List<int[]> firstCombinations = new ArrayList<>();
         int[] computerCalculations = new int[4];
 
+        //This code was referred to https://www.geeksforgeeks.org/numbers-unique-distinct-digits/
+        //and modified majorly by Jenny Wang. One line was modified by Ying-Ni Huang.
         int l = 999, r = 10000;
         int i = 0;
         for (i = l; i <= r; i++) {
