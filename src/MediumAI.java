@@ -7,7 +7,8 @@ public class MediumAI extends EasyAI{
     protected String s;
 
     public MediumAI(){
-         this.cG = new ArrayList<>();
+        this.result = new ArrayList<>();
+        this.cG = new ArrayList<>();
     }
 
 
@@ -195,7 +196,7 @@ public class MediumAI extends EasyAI{
                     "Results: " + bulls + " bulls " + cows + " cows" +
                     "Computer guess: "+ computerGuess[0] + + computerGuess[1] + + computerGuess[2] + + computerGuess[3] +
                     "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
-            List<String> result = new ArrayList<>();
+
             result.add(s);
 
             return result;

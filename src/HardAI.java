@@ -2,11 +2,12 @@
 import java.util.*;
 
 public class HardAI extends MediumAI{
+    protected List<String> result;
 
 
     public HardAI() {
 
-        super();
+        this.result = new ArrayList<>();
 
 
     }
@@ -174,9 +175,32 @@ public class HardAI extends MediumAI{
 
 
 
-    @Override
-    public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess, int bullsComputer, int cowsComputer, int[] computerGuess) {
-        return super.printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
+    public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
+        System.out.println("Turn "+ counter + " -Your guess: ");
+        for (int i = 0; i < 4; i++) {
+            System.out.print(playerGuess[i]);
+
+        }
+        System.out.println();
+        System.out.println("Results: " + bulls + " bulls " + cows + " cows") ;
+        System.out.println("Computer guess: " );
+        for (int i = 0; i < 4; i++) {
+            System.out.print(computerGuess[i]);
+
+        }
+        System.out.println();
+        System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
+        System.out.println("----------");
+
+        String s = ("Turn "+ counter + " -Your guess: " + playerGuess[0] + + playerGuess[1] + + playerGuess[2] + + playerGuess[3] +
+                "Results: " + bulls + " bulls " + cows + " cows" +
+                "Computer guess: "+ computerGuess[0] + + computerGuess[1] + + computerGuess[2] + + computerGuess[3] +
+                "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
+
+        result.add(s);
+
+        return result;
+
     }
 
 

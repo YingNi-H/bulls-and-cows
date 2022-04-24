@@ -7,23 +7,11 @@ public class EasyAI extends PlayerOnlyGuess {
         protected static int max_turn;
         protected static int max_digit;
         protected List<String> result;
-        protected String s;
-    protected int bulls;
-    protected int cows;
-    protected int[] playerGuess;
-    protected int bullsComputer;
-    protected int cowsComputer;
-    protected int[] computerGuess;
+
 
         public EasyAI(){
-            this.result = result;
-            this.bulls = bulls;
-            this.cows = cows;
-            this.playerGuess = playerGuess;
-            this.bullsComputer = bullsComputer;
-            this.cowsComputer = cowsComputer;
-            this.computerGuess = computerGuess;
-            this.s = s;
+            this.result = new ArrayList<>();
+
 
         }
 
@@ -209,8 +197,9 @@ public class EasyAI extends PlayerOnlyGuess {
                 "Results: " + bulls + " bulls " + cows + " cows" +
                 "Computer guess: "+ computerGuess[0] + + computerGuess[1] + + computerGuess[2] + + computerGuess[3] +
                 "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
-        List<String> result = new ArrayList<>();
+
         result.add(s);
+        System.out.println(result.size());
 
         return result;
 

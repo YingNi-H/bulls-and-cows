@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.Scanner;
 
 public class GameControl {
@@ -13,57 +12,70 @@ public class GameControl {
     private MediumAI medium;
     private HardAI hard;
     private String level;
-    private int bulls;
-    private int cows;
-    private int[] playerGuess;
-    private int bullsComputer;
-    private int cowsComputer;
-    private int[] computerGuess;
-    private String s;
+
 
 
 
 
     public void start(){
-        chooseLevel();
-        saveFile();
+        level = chooseLevel();
+        saveFile(level);
 
     }
 
 
 
 
-    public void saveFile() {
+    public void saveFile(String level) {
+
 
         System.out.println("Do you want to save result? Y/N");
         String str = Keyboard.readInput();
         while(true){
-        if(str.toLowerCase().equals("n")){
+            if(str.toLowerCase().equals("n")){
             System.out.println("Bye~");
             break;
-        }else if(str.toLowerCase().equals("y")) {
+
+            }else if(str.toLowerCase().equals("y")) {
             System.out.println("Enter a file name: ");
             String fileName = Keyboard.readInput();
-
-
             File myFile = new File(fileName);
             try (BufferedWriter bW = new BufferedWriter(new FileWriter(myFile))) {
-                //bW.write(easy.printEachResult(bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess));
-                Iterator<String> resultIterator = easy.result.iterator();
-                while(resultIterator.hasNext()){
-                    bW.write(easy.s);
+
+                switch (level) {
+                    case "2":
+                    case "easy":
+                        for (String s : easy.result) {
+                        bW.write(easy.result.toString());
+                        }
+                        break;
+
+                    case "3":
+                    case "medium":
+                        for (String s : medium.result) {
+                            bW.write(medium.result.toString());
+                        }
+                        break;
+
+                    case "4":
+                    case "hard":
+                        for (String s : hard.result) {
+                            bW.write(hard.result.toString());
+                        }
+                        break;
+
                 }
-
-
-
-
 
             } catch (IOException e) {
                 System.out.println("Error: " + e.getMessage());
             }
             break;
-        }
+            }
 
+//            if(!str.toLowerCase().equals("n")||!str.toLowerCase().equals("y")){
+//                System.out.println("Enter Y/N: ");
+//                continue;
+//            }
 
         }
     }
@@ -71,10 +83,7 @@ public class GameControl {
 
 
 
-
-
-
-    public void chooseLevel(){
+    public String chooseLevel(){
         System.out.println("Welcome to Bulls and Cows game!");
         System.out.println("Please choose level: ");
         System.out.println("1 - PlayerOnly");
@@ -118,8 +127,9 @@ public class GameControl {
 
                 }
 
-        }
 
+        }
+        return level;
 
     }
 
