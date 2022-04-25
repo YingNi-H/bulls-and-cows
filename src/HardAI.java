@@ -32,10 +32,12 @@ public class HardAI extends MediumAI{
 
         playerAuto();
 
+        getAutoGuess(fileName);
+
         List<int[]> combinations = printUnique ();
 
 
-        game(computerSecreteNumber, playerSecreteNumber,combinations, fileName);
+        game(computerSecreteNumber, playerSecreteNumber,combinations, autoGuess);
 
 
     }
@@ -68,13 +70,14 @@ public class HardAI extends MediumAI{
     }
 
 
-    public int[] getAutoGuess(String fileName){
+    public List<int[]> getAutoGuess(String fileName){
             String line = "";
             try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
 
                 while ((line = reader.readLine()) != null) {
                     System.out.println(line);
                     System.out.println(line.length());
+                    playerGuess = new int[4];
                     for (int i = 0; i < line.length(); i++) {
                         playerGuess[i] = Integer.parseInt(line.substring(i,i+1));
                         System.out.print(playerGuess[i]);
@@ -87,10 +90,16 @@ public class HardAI extends MediumAI{
             }catch (IOException e) {
                 System.out.println("Error: " + e.getMessage());
             }
-            playerGuess = autoGuess.get(0);
+//        playerGuess= autoGuess.get(2);
+//
+//        for (int i = 0; i < 4; i++) {
+//            System.out.println(playerGuess[i]);
+//
+//        }
 
 
-        return playerGuess;
+
+        return autoGuess;
     }
 
     @Override
@@ -187,21 +196,21 @@ public class HardAI extends MediumAI{
 
 
 
-    public void game(int[] computerSecreteNumber, int[] playerSecreteNumber, List<int[]> combinations, String fileName) {
+    public void game(int[] computerSecreteNumber, int[] playerSecreteNumber, List<int[]> combinations, List<int[]> autoGuess) {
         boolean win = false;
         boolean winCom = false;
         int counter = 0;
 
-        while(counter < 7 ){
+        for(counter = 0; counter < 7; counter++ ){
             System.out.print("Enter your guess > ");
             if(autoPlay){
-                playerGuess = getAutoGuess(fileName);
+                playerGuess = autoGuess.get(counter);
 
             }else {
                 playerGuess = getPlayerGuess();
             }
 
-            counter++;
+            //counter++;
             int bulls = getBulls(playerGuess, computerSecreteNumber);
             int cows= getCows(playerGuess, computerSecreteNumber);
 
@@ -247,7 +256,7 @@ public class HardAI extends MediumAI{
 
 
     public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
-        System.out.println("Turn "+ counter + " -Your guess: ");
+        System.out.println("Turn "+ (counter +1 ) + " -Your guess: ");
         for (int i = 0; i < 4; i++) {
             System.out.print(playerGuess[i]);
 
@@ -263,7 +272,7 @@ public class HardAI extends MediumAI{
         System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
         System.out.println("----------");
 
-        String s = ("Turn "+ counter + " -Your guess: " + playerGuess[0] + + playerGuess[1] + + playerGuess[2] + + playerGuess[3] +
+        String s = ("Turn "+ (counter + 1) + " -Your guess: " + playerGuess[0] + + playerGuess[1] + + playerGuess[2] + + playerGuess[3] +
                 "Results: " + bulls + " bulls " + cows + " cows" +
                 "Computer guess: "+ computerGuess[0] + + computerGuess[1] + + computerGuess[2] + + computerGuess[3] +
                 "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
