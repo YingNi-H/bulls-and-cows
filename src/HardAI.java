@@ -18,12 +18,37 @@ public class HardAI extends MediumAI{
 
         int[] computerSecreteNumber = setComputerSecreteNumber();
 
+        autoGuess();
+
         List<int[]> combinations = printUnique ();
 
 
         game(computerSecreteNumber, playerSecreteNumber,combinations);
 
 
+    }
+
+    public int[] autoGuess(){
+        System.out.println("Do you want the computer to guess for you? Y/N");
+        String t = Keyboard.readInput().toLowerCase();
+        if(t.equals("n")){
+          playerGuess = null;
+        }else if(t.equals("y")){
+            System.out.println("Enter a file name among \"auto1\", \"auto2\", \"auto3\", \"auto4\", \"auto5\", \"auto6\", and \"auto7\": ");
+            while(true) {
+                String r = Keyboard.readInput().toLowerCase();
+                if ((!r.equals("auto1")) && (!r.equals("auto2")) && (!r.equals("auto3")) && (!r.equals("auto4")) &&
+                            (!r.equals("auto5")) && (!r.equals("auto6")) && (!r.equals("auto7"))) {
+                        System.out.println("Invalid file name! Try again > ");
+
+                } else{
+                break;
+                }
+            }
+
+
+        }
+        return playerGuess;
     }
 
     @Override
