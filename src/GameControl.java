@@ -45,23 +45,17 @@ public class GameControl {
                 switch (level) {
                     case "2":
                     case "easy":
-                        for (String s : easy.result) {
                         bW.write(easy.result.toString());
-                        }
                         break;
 
                     case "3":
                     case "medium":
-                        for (String s : medium.result) {
-                            bW.write(medium.result.toString());
-                        }
+                        bW.write(medium.result.toString());
                         break;
 
                     case "4":
                     case "hard":
-                        for (String s : hard.result) {
-                            bW.write(hard.result.toString());
-                        }
+                        bW.write(hard.result.toString());
                         break;
 
                 }
