@@ -1,13 +1,23 @@
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.*;
 
 public class HardAI extends MediumAI{
     protected List<String> result;
+    protected boolean autoPlay;
+    protected String fileName;
+    protected int[] playerGuess;
 
 
     public HardAI() {
+        this.fileName = "";
+        this.playerGuess = new int[0];
 
         this.result = new ArrayList<>();
+
 
 
     }
@@ -18,27 +28,31 @@ public class HardAI extends MediumAI{
 
         int[] computerSecreteNumber = setComputerSecreteNumber();
 
-        autoGuess();
+        playerAuto();
 
         List<int[]> combinations = printUnique ();
 
 
-        game(computerSecreteNumber, playerSecreteNumber,combinations);
+        game(computerSecreteNumber, playerSecreteNumber,combinations, fileName);
 
 
     }
 
-    public int[] autoGuess(){
+    public boolean playerAuto(){
+
         System.out.println("Do you want the computer to guess for you? Y/N");
         String t = Keyboard.readInput().toLowerCase();
         if(t.equals("n")){
-          playerGuess = null;
+          autoPlay = false;
+
         }else if(t.equals("y")){
             System.out.println("Enter a file name among \"auto1\", \"auto2\", \"auto3\", \"auto4\", \"auto5\", \"auto6\", and \"auto7\": ");
+
+
             while(true) {
-                String r = Keyboard.readInput().toLowerCase();
-                if ((!r.equals("auto1")) && (!r.equals("auto2")) && (!r.equals("auto3")) && (!r.equals("auto4")) &&
-                            (!r.equals("auto5")) && (!r.equals("auto6")) && (!r.equals("auto7"))) {
+                fileName = Keyboard.readInput().toLowerCase();
+                if ((!fileName.equals("auto1")) && (!fileName.equals("auto2")) && (!fileName.equals("auto3")) && (!fileName.equals("auto4")) &&
+                            (!fileName.equals("auto5")) && (!fileName.equals("auto6")) && (!fileName.equals("auto7"))) {
                         System.out.println("Invalid file name! Try again > ");
 
                 } else{
@@ -46,8 +60,35 @@ public class HardAI extends MediumAI{
                 }
             }
 
+            autoPlay = true;
 
         }
+        return autoPlay;
+    }
+
+
+    public int[] getAutoGuess(String fileName){
+            String line = "";
+            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                    System.out.println(line.length());
+//                    for (int i = 0; i < line.length(); i++) {
+//                        playerGuess[i] = Integer.parseInt(line.substring(i,i+1));
+//                        System.out.print(playerGuess[i]);
+//
+//                    }
+                }
+
+            }catch (IOException e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+            //playerGuess = new int[] {1,2,3,4};
+        //playerGuess here successfully passed into game.
+
+
+
         return playerGuess;
     }
 
@@ -145,21 +186,25 @@ public class HardAI extends MediumAI{
 
 
 
-    public void game(int[] computerSecreteNumber, int[] playerSecreteNumber, List<int[]> combinations) {
+    public void game(int[] computerSecreteNumber, int[] playerSecreteNumber, List<int[]> combinations, String fileName) {
         boolean win = false;
         boolean winCom = false;
         int counter = 0;
 
         while(counter < 7 ){
             System.out.print("Enter your guess > ");
-            int [] playerGuess = getPlayerGuess();
+            if(autoPlay){
+                playerGuess = getAutoGuess(fileName);
+
+            }else {
+                playerGuess = getPlayerGuess();
+            }
+
             counter++;
             int bulls = getBulls(playerGuess, computerSecreteNumber);
             int cows= getCows(playerGuess, computerSecreteNumber);
 
-
             int [] computerGuess = getComputerGuess(combinations, playerSecreteNumber);
-
             int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
             int cowsComputer= getCows(computerGuess, playerSecreteNumber);
             printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);

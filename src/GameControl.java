@@ -110,7 +110,7 @@ public class GameControl {
                         valid = true;
                         medium.start();
                         break;
-                    case "hard":
+                    case "auto3":
                     case "4":
                         hard = new HardAI();
                         valid = true;
