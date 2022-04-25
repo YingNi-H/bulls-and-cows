@@ -19,7 +19,10 @@ public class GameControl {
 
     public void start(){
         level = chooseLevel();
-        saveFile(level);
+        if(!((level.toLowerCase()).equals("playeronly") ||(level.toLowerCase()).equals("1") )){
+            saveFile(level);
+        }
+
 
     }
 

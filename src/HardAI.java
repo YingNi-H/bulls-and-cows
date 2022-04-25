@@ -10,11 +10,13 @@ public class HardAI extends MediumAI{
     protected boolean autoPlay;
     protected String fileName;
     protected int[] playerGuess;
+    protected List<int[]> autoGuess;
 
 
     public HardAI() {
         this.fileName = "";
-        this.playerGuess = new int[0];
+        this.playerGuess = new int[4];
+        this.autoGuess = new ArrayList<>();
 
         this.result = new ArrayList<>();
 
@@ -48,7 +50,6 @@ public class HardAI extends MediumAI{
         }else if(t.equals("y")){
             System.out.println("Enter a file name among \"auto1\", \"auto2\", \"auto3\", \"auto4\", \"auto5\", \"auto6\", and \"auto7\": ");
 
-
             while(true) {
                 fileName = Keyboard.readInput().toLowerCase();
                 if ((!fileName.equals("auto1")) && (!fileName.equals("auto2")) && (!fileName.equals("auto3")) && (!fileName.equals("auto4")) &&
@@ -74,19 +75,19 @@ public class HardAI extends MediumAI{
                 while ((line = reader.readLine()) != null) {
                     System.out.println(line);
                     System.out.println(line.length());
-//                    for (int i = 0; i < line.length(); i++) {
-//                        playerGuess[i] = Integer.parseInt(line.substring(i,i+1));
-//                        System.out.print(playerGuess[i]);
-//
-//                    }
+                    for (int i = 0; i < line.length(); i++) {
+                        playerGuess[i] = Integer.parseInt(line.substring(i,i+1));
+                        System.out.print(playerGuess[i]);
+
+                    }
+                    autoGuess.add(playerGuess);
+                    System.out.println(autoGuess.size());
                 }
 
             }catch (IOException e) {
                 System.out.println("Error: " + e.getMessage());
             }
-            //playerGuess = new int[] {1,2,3,4};
-        //playerGuess here successfully passed into game.
-
+            playerGuess = autoGuess.get(0);
 
 
         return playerGuess;
