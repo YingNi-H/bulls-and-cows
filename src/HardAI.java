@@ -205,9 +205,15 @@ public class HardAI extends MediumAI{
             System.out.print("Enter your guess > ");
             if(autoPlay){
                 playerGuess = autoGuess.get(counter);
+                if((!win) && (!winCom) && (autoGuess.get(counter) == null)){
+                    playerGuess = getPlayerGuess();
+
+
+                }
 
             }else {
                 playerGuess = getPlayerGuess();
+
             }
 
             //counter++;
