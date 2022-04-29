@@ -32,7 +32,7 @@ public class HardAI extends MediumAI{
 
         playerAuto();
 
-        getAutoGuess(fileName);
+        //getAutoGuess(fileName);
 
         List<int[]> combinations = printUnique ();
 
@@ -54,13 +54,15 @@ public class HardAI extends MediumAI{
 
             while(true) {
                 fileName = Keyboard.readInput().toLowerCase();
+                getAutoGuess(fileName);
                 if ((!fileName.equals("auto1")) && (!fileName.equals("auto2")) && (!fileName.equals("auto3")) && (!fileName.equals("auto4")) &&
                             (!fileName.equals("auto5")) && (!fileName.equals("auto6")) && (!fileName.equals("auto7"))) {
                         System.out.println("Invalid file name! Try again > ");
 
-                } else{
+                } else {
                 break;
                 }
+
             }
 
             autoPlay = true;

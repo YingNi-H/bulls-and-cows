@@ -199,7 +199,7 @@ public class EasyAI extends PlayerOnlyGuess {
                 "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
 
         result.add(s);
-        System.out.println(result.size());
+
 
         return result;
 
