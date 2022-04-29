@@ -1,6 +1,5 @@
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
@@ -32,7 +31,6 @@ public class HardAI extends MediumAI{
 
         playerAuto();
 
-        //getAutoGuess(fileName);
 
         List<int[]> combinations = printUnique ();
 
@@ -122,12 +120,12 @@ public class HardAI extends MediumAI{
 
     public List<int[]> printUnique () {
 
-        List<int[]> firstCombinations = new ArrayList<>();
+        List<int[]> combinations = new ArrayList<>();
         int[] computerCalculations = new int[4];
 
         //This code was referred to https://www.geeksforgeeks.org/numbers-unique-distinct-digits/
         //and modified majorly by Jenny Wang. One line was modified by Ying-Ni Huang.
-        int l = 999, r = 10000;
+        int l = 99, r = 10000;
         int i = 0;
         for (i = l; i <= r; i++) {
             int num = i;
@@ -150,20 +148,20 @@ public class HardAI extends MediumAI{
                     a = a / 10;
 
                 }
-                firstCombinations.add(computerCalculations);
+                combinations.add(computerCalculations);
 
             }
 
         }
 
-        return firstCombinations;
+        return combinations;
 
     }
 
 
-    public int[] getComputerGuess(List<int[]> combinations, int[] playerSecreteNumber ){
+    public int[] getComputerGuess(List<int[]> combinations){
         int[] computerGuess = new int[0];
-        //System.out.println("computerGuess: "+combinations.size());
+        System.out.println("computerGuess: "+combinations.size());
 
         Collections.shuffle(combinations);
 
@@ -208,6 +206,7 @@ public class HardAI extends MediumAI{
             if(autoPlay){
 
                 try{playerGuess = autoGuess.get(counter);
+
                 }catch(IndexOutOfBoundsException e){
                     playerGuess = getPlayerGuess();
                 }
@@ -217,11 +216,11 @@ public class HardAI extends MediumAI{
 
             }
 
-            //counter++;
             int bulls = getBulls(playerGuess, computerSecreteNumber);
             int cows= getCows(playerGuess, computerSecreteNumber);
 
-            int [] computerGuess = getComputerGuess(combinations, playerSecreteNumber);
+            int[] computerGuess = getComputerGuess(combinations);
+
             int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
             int cowsComputer= getCows(computerGuess, playerSecreteNumber);
             printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
