@@ -193,10 +193,23 @@ public class EasyAI extends PlayerOnlyGuess {
         System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
         System.out.println("----------");
 
-        String s = ("Turn "+ counter + " -Your guess: " + playerGuess[0] + + playerGuess[1] + + playerGuess[2] + + playerGuess[3] +
+        String s = "";
+
+        if(max_digit == 4) {
+            s = ("Turn "+ counter + " -Your guess: " + playerGuess[0] + playerGuess[1] + playerGuess[2] + playerGuess[3] +
                 "Results: " + bulls + " bulls " + cows + " cows" +
-                "Computer guess: "+ computerGuess[0] + + computerGuess[1] + + computerGuess[2] + + computerGuess[3] +
+                "Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
                 "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
+        }
+        if(max_digit == 6) {
+            s = ("Turn "+ counter + " -Your guess: " + playerGuess[0] + playerGuess[1] + playerGuess[2] + playerGuess[3] +
+                    playerGuess[4] + playerGuess[5] +
+                    "Results: " + bulls + " bulls " + cows + " cows" +
+                    "Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
+                    computerGuess[4] + computerGuess[5] +
+                    "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
+
+        }
 
         result.add(s);
 
