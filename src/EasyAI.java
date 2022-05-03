@@ -183,7 +183,7 @@ public class EasyAI extends PlayerOnlyGuess {
 
         }
         System.out.println();
-        System.out.println("Results: " + bulls + " bulls " + cows + " cows") ;
+        System.out.println("Results: " + bulls + " bulls " + cows + " cows ") ;
         System.out.println("Computer guess: " );
         for (int i = 0; i < max_digit; i++) {
             System.out.print(computerGuess[i]);
@@ -197,17 +197,17 @@ public class EasyAI extends PlayerOnlyGuess {
 
         if(max_digit == 4) {
             s = ("Turn "+ counter + " -Your guess: " + playerGuess[0] + playerGuess[1] + playerGuess[2] + playerGuess[3] +
-                "Results: " + bulls + " bulls " + cows + " cows" +
-                "Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
-                "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
+                " Results: " + bulls + " bulls " + cows + " cows " +
+                " Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
+                " Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
         }
         if(max_digit == 6) {
             s = ("Turn "+ counter + " -Your guess: " + playerGuess[0] + playerGuess[1] + playerGuess[2] + playerGuess[3] +
                     playerGuess[4] + playerGuess[5] +
-                    "Results: " + bulls + " bulls " + cows + " cows" +
-                    "Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
+                    " Results: " + bulls + " bulls " + cows + " cows " +
+                    " Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
                     computerGuess[4] + computerGuess[5] +
-                    "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
+                    " Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
 
         }
 

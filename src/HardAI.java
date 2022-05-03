@@ -75,16 +75,16 @@ public class HardAI extends MediumAI{
             try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
 
                 while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
-                    System.out.println(line.length());
+                    //System.out.println(line);
+                    //System.out.println(line.length());
                     playerGuess = new int[4];
                     for (int i = 0; i < line.length(); i++) {
                         playerGuess[i] = Integer.parseInt(line.substring(i,i+1));
-                        System.out.print(playerGuess[i]);
+                        //System.out.print(playerGuess[i]);
 
                     }
                     autoGuess.add(playerGuess);
-                    System.out.println(autoGuess.size());
+                    //System.out.println(autoGuess.size());
                 }
 
             }catch (IOException e) {
@@ -161,7 +161,7 @@ public class HardAI extends MediumAI{
 
     public int[] getComputerGuess(List<int[]> combinations){
         int[] computerGuess = new int[0];
-        System.out.println("computerGuess: "+combinations.size());
+        //System.out.println("computerGuess: "+combinations.size());
 
         Collections.shuffle(combinations);
 
@@ -202,7 +202,7 @@ public class HardAI extends MediumAI{
         int counter = 0;
 
         for(counter = 0; counter < 7; counter++ ){
-            System.out.print("Enter your guess > ");
+            System.out.println("Enter your guess > ");
             if(autoPlay){
 
                 try{playerGuess = autoGuess.get(counter);
@@ -279,9 +279,9 @@ public class HardAI extends MediumAI{
         System.out.println("----------");
 
         String s = ("Turn "+ (counter + 1) + " -Your guess: " + playerGuess[0] + playerGuess[1] + playerGuess[2] + playerGuess[3] +
-                "Results: " + bulls + " bulls " + cows + " cows" +
-                "Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
-                "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
+                " Results: " + bulls + " bulls " + cows + " cows " +
+                " Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
+                " Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
 
         result.add(s);
 

@@ -193,9 +193,10 @@ public class MediumAI extends EasyAI{
             System.out.println("----------");
 
             String s = ("Turn "+ counter + " -Your guess: " + playerGuess[0] + playerGuess[1] + playerGuess[2] + playerGuess[3] +
-                    "Results: " + bulls + " bulls " + cows + " cows" +
-                    "Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
-                    "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
+                    " Results: " + bulls + " bulls " + cows + " cows " +
+                    " Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
+                    " Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
+
 
             result.add(s);
 
