@@ -49,7 +49,7 @@ public class GameControl {
                     case "2":
                     case "easy":
                         for (int i = 0; i < easy.result.size(); i++) {
-                            bW.write(easy.result.get(i).toString());
+                            bW.write(easy.result.get(i));
                             bW.newLine();
                         }
                         break;
@@ -57,7 +57,7 @@ public class GameControl {
                     case "3":
                     case "medium":
                         for (int i = 0; i < medium.result.size(); i++) {
-                            bW.write(medium.result.get(i).toString());
+                            bW.write(medium.result.get(i));
                             bW.newLine();
                         }
                         break;
@@ -65,7 +65,7 @@ public class GameControl {
                     case "4":
                     case "hard":
                         for (int i = 0; i < hard.result.size(); i++) {
-                            bW.write(hard.result.get(i).toString());
+                            bW.write(hard.result.get(i));
                             bW.newLine();
                         }
 
