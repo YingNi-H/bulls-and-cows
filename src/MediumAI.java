@@ -4,7 +4,6 @@ import java.util.*;
 public class MediumAI extends EasyAI{
     protected List<int[]> cG;
     protected List<String> result;
-    protected String s;
 
     public MediumAI(){
         this.result = new ArrayList<>();

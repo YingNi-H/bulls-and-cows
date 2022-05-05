@@ -261,6 +261,9 @@ public class HardAI extends MediumAI{
 
 
 
+
+
+
     public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
         System.out.println("Turn "+ (counter +1 ) + " -Your guess: ");
         for (int i = 0; i < 4; i++) {
@@ -288,7 +291,6 @@ public class HardAI extends MediumAI{
         return result;
 
     }
-
 
 
 

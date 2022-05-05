@@ -193,6 +193,11 @@ public class EasyAI extends PlayerOnlyGuess {
         System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
         System.out.println("----------");
 
+        //The above print out is duplicate with the following String s.
+        //I tried to reduce duplication while keeping the format of my print out.
+        //So far, I couldn't achieve both but clear format is important for user experience.
+        //So I keep the duplication.
+
         String s = "";
 
         if(max_digit == 4) {
@@ -211,12 +216,24 @@ public class EasyAI extends PlayerOnlyGuess {
 
         }
 
+        //I also tried to improve the duplication in the if, else if for String s.
+        //It caused exception, so I didn't change.
+
         result.add(s);
 
 
         return result;
 
     }
+
+
+
+
+
+
+
+
+
 
 
 
