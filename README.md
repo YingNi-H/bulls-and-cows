@@ -1,5 +1,7 @@
 ![Ying-Ni First Design](https://user-images.githubusercontent.com/100735265/162842594-4974791e-a0b8-4124-b520-1f30ad4c761d.png)
 ![YN revise](https://user-images.githubusercontent.com/100735265/163064935-1f4daedd-bf52-4cd1-bb81-f88b4ab5194c.svg)
+![final UML assignment 2](https://user-images.githubusercontent.com/100735265/167061704-07d9018e-212c-4345-a26b-3715a22274cb.png)
+
 # Bulls & Cows
 
 ## Overview
