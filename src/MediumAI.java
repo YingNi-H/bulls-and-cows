@@ -8,6 +8,8 @@ public class MediumAI extends EasyAI{
     public MediumAI(){
         this.result = new ArrayList<>();
         this.cG = new ArrayList<>();
+        this.max_turn = 7;
+        this.max_digit = 4;
     }
 
 
@@ -22,55 +24,9 @@ public class MediumAI extends EasyAI{
         }
 
 
-// public int[] setComputerSecreteNumber(): Due to inheritance, it doesn't need to appear.
-
-
-
-        public int[] setPlayerSecreteNumber(){
-            System.out.println("Please enter your secrete number: ");
-            int[] playerSecreteNumber = getPlayerGuess();
-            System.out.println("----------");
-            return playerSecreteNumber;
-        }
-
-
-        public int[] getPlayerGuess(){
-            String playerGuessstr = "" ;
-            boolean valid = false;
-            while(!valid) {
-                try {
-                    playerGuessstr = Keyboard.readInput();
-
-                    int temp = Integer.parseInt(playerGuessstr);
-
-                    if ((playerGuessstr.length()) != 4) {
-                        throw new StringIndexOutOfBoundsException(4 + " digits numbers!");
-                    }
-
-                    for (int i = 0; i < 4; i++) {
-                        for (int j = 0; j < 4; j++) {
-                            if( (i != j) && playerGuessstr.charAt(i) == playerGuessstr.charAt(j)){
-
-                                throw new SameNumberException("No same numbers!");
-                            }
-                        }
-
-                    }
-                    valid = true;
-
-                } catch ( NumberFormatException | StringIndexOutOfBoundsException | SameNumberException e) {
-                    System.out.println("Error: " + e.getMessage() + " Try a valid number >> ");
-
-                }
-            }
-            int[] playerGuess = new int[4];
-            for (int j = 0; j < 4; j++) {
-                playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
-
-            }
-
-            return playerGuess;
-        }
+//      public int[] setComputerSecreteNumber(): Reuse easyAI code
+//      public int[] setPlayerSecreteNumber(): Reuse easyAI code, it doesn't need to appear.
+//      public int[] getPlayerGuess(): Reuse easyAI code w/ max_turn and max_digit initialized in constructor
 
 
     public int[] getComputerGuess() {

@@ -4,8 +4,6 @@ import java.util.List;
 
 public class EasyAI extends PlayerOnlyGuess {
 
-        protected static int max_turn;
-        protected static int max_digit;
         protected List<String> result;
 
 
@@ -65,7 +63,7 @@ public class EasyAI extends PlayerOnlyGuess {
     }
 
 
-//    public int[] setComputerSecreteNumber(): Due to inheritance, it doesn't need to appear.
+//    public int[] setComputerSecreteNumber(): Reuse PlayerOnlyGuess code, it doesn't need to appear.
 
 
 
@@ -76,44 +74,6 @@ public class EasyAI extends PlayerOnlyGuess {
         return playerSecreteNumber;
     }
 
-
-    public int[] getPlayerGuess(){
-        String playerGuessstr = "" ;
-        boolean valid = false;
-        while(!valid) {
-            try {
-                playerGuessstr = Keyboard.readInput();
-
-                int temp = Integer.parseInt(playerGuessstr);
-
-                if ((playerGuessstr.length()) != max_digit) {
-                    throw new StringIndexOutOfBoundsException(max_digit + " digits numbers!");
-                }
-
-                for (int i = 0; i < max_digit; i++) {
-                    for (int j = 0; j < max_digit; j++) {
-                        if( (i != j) && playerGuessstr.charAt(i) == playerGuessstr.charAt(j)){
-
-                            throw new SameNumberException("No same numbers!");
-                        }
-                    }
-
-                }
-                valid = true;
-
-            } catch ( NumberFormatException | StringIndexOutOfBoundsException | SameNumberException e) {
-                System.out.println("Error: " + e.getMessage() + " Try a valid number >> ");
-
-            }
-        }
-        int[] playerGuess = new int[max_digit];
-        for (int j = 0; j < max_digit; j++) {
-            playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
-
-        }
-
-        return playerGuess;
-    }
 
 
 

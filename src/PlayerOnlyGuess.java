@@ -6,6 +6,13 @@ public class PlayerOnlyGuess {
     protected int[] playerGuess;
     protected int bulls;
     protected int cows;
+    protected int max_turn;
+    protected int max_digit;
+
+    public PlayerOnlyGuess(){
+        max_turn = 7;
+        max_digit = 4;
+    }
 
 
     public void start(){
@@ -44,40 +51,36 @@ public class PlayerOnlyGuess {
             try {
                 playerGuessstr = Keyboard.readInput();
 
-                int temp = Integer.parseInt(playerGuessstr);
-
-                if (playerGuessstr.length() < 4) {
-                    System.out.println("Enter 4 digits numbers!");
-                    valid = false;
+                if ((playerGuessstr.length()) != max_digit) {
+                    throw new StringIndexOutOfBoundsException(max_digit + " digits numbers!");
                 }
 
-                for (int i = 0; i < 4; i++) {
-                    for (int j = 0; j < 4; j++) {
+                for (int i = 0; i < max_digit; i++) {
+                    for (int j = 0; j < max_digit; j++) {
                         if( (i != j) && playerGuessstr.charAt(i) == playerGuessstr.charAt(j)){
-                            valid = true;
-                            throw new SameNumberException("No same numbers!");
 
+                            throw new SameNumberException("No same numbers!");
                         }
                     }
 
                 }
-
                 valid = true;
 
-            } catch (StringIndexOutOfBoundsException | NumberFormatException | SameNumberException e) {
-                System.out.println("Error: " + e.getMessage());
-                valid = false;
+            } catch ( NumberFormatException | StringIndexOutOfBoundsException | SameNumberException e) {
+                System.out.println("Error: " + e.getMessage() + " Try a valid number >> ");
 
             }
         }
-        int[] playerGuess = new int[4];
-        for (int j = 0; j <4; j++) {
+        int[] playerGuess = new int[max_digit];
+        for (int j = 0; j < max_digit; j++) {
             playerGuess[j] = Integer.parseInt(playerGuessstr.substring(j, j + 1));
 
         }
 
         return playerGuess;
     }
+
+
 
 
     public void game(int[] computerSecreteNumber) {
