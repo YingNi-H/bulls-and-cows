@@ -22,26 +22,7 @@ public class MediumAI extends EasyAI{
         }
 
 
-        public int[] setComputerSecreteNumber() {
-            List<Integer> list = new ArrayList<>();
-            for(int i = 0; i < 10; i++){
-                list.add(i);
-            }
-
-            Collections.shuffle(list);
-
-            int[] computerSecreteNumber = new int[4];
-            for (int i = 0; i < 4; i++) {
-                computerSecreteNumber[i] = list.get(i);
-            }
-
-//        for(Integer element : computerSecreteNumber){
-//            System.out.println(element);
-//        }
-
-            return computerSecreteNumber;
-
-        }
+// public int[] setComputerSecreteNumber(): Due to inheritance, it doesn't need to appear.
 
 
 

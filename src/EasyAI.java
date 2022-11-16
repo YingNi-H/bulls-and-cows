@@ -65,26 +65,8 @@ public class EasyAI extends PlayerOnlyGuess {
     }
 
 
-    public int[] setComputerSecreteNumber() {
-        List<Integer> list = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-            list.add(i);
-        }
+//    public int[] setComputerSecreteNumber(): Due to inheritance, it doesn't need to appear.
 
-        Collections.shuffle(list);
-
-        int[] computerSecreteNumber = new int[max_digit];
-        for (int i = 0; i < max_digit; i++) {
-            computerSecreteNumber[i] = list.get(i);
-        }
-
-//        for(Integer element : computerSecreteNumber){
-//            System.out.println(element);
-//        }
-
-        return computerSecreteNumber;
-
-    }
 
 
     public int[] setPlayerSecreteNumber(){
