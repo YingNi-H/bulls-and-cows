@@ -12,7 +12,7 @@ public class MediumAI extends EasyAI{
         this.max_digit = 4;
     }
 
-
+    @Override
     public void start() {
 
             int[] playerSecreteNumber =setPlayerSecreteNumber();
@@ -22,11 +22,6 @@ public class MediumAI extends EasyAI{
             game(computerSecreteNumber, playerSecreteNumber);
 
         }
-
-
-//      public int[] setComputerSecreteNumber(): Reuse easyAI code
-//      public int[] setPlayerSecreteNumber(): Reuse easyAI code, it doesn't need to appear.
-//      public int[] getPlayerGuess(): Reuse easyAI code w/ max_turn and max_digit initialized in constructor
 
 
     public int[] getComputerGuess() {
@@ -101,15 +96,6 @@ public class MediumAI extends EasyAI{
         }
 
 
-        @Override
-        public boolean winPlayer(int[] playerGuess, int[] computerSecreteNumber) {
-            return super.winPlayer(playerGuess, computerSecreteNumber);
-        }
-
-        public boolean winComputer(int[] computerGuess, int[] playerSecreteNumber) {
-            return super.winPlayer(computerGuess, playerSecreteNumber);
-        }
-
 
         public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
             System.out.println("Turn "+ counter + " -Your guess: ");
@@ -140,56 +126,9 @@ public class MediumAI extends EasyAI{
 
         }
 
-        public int getBulls(int[] playerGuess, int[] computerSecreteNumber){
-            int bulls = 0;
-            for (int i = 0; i < 4; i++) {
-                if(playerGuess[i] == computerSecreteNumber[i]){
-                    bulls++;
-                }
-            }
-            return bulls;
-        }
-
-        public int getCows(int[] playerGuess, int[] computerSecreteNumber){
-            int cows = 0;
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
-                    if((i != j) && playerGuess[i] == computerSecreteNumber[j]){
-                        cows++;
-                    }
-
-                }
-
-            }
-            return cows;
-        }
 
 
 
-        public int getBullsComputer(int[] computerGuess, int[] playerSecreteNumber) {
-            int bullsComputer = 0;
-            for (int i = 0; i < 4; i++) {
-                if(computerGuess[i] == playerSecreteNumber[i]){
-                    bullsComputer++;
-                }
-            }
-            return bullsComputer;
-        }
-
-
-        public int getCowsComputer(int[] computerGuess, int[] playerSecreteNumber) {
-            int cowsComputer = 0;
-            for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 4; j++) {
-                    if((i != j) && computerGuess[i] == playerSecreteNumber[j]){
-                        cowsComputer++;
-                    }
-
-                }
-
-            }
-            return cowsComputer;
-        }
 
 
     }

@@ -2,20 +2,17 @@ import java.util.*;
 
 
 public class PlayerOnlyGuess {
-    protected int[] computerSecreteNumber;
-    protected int[] playerGuess;
-    protected int bulls;
-    protected int cows;
+
     protected int max_turn;
     protected int max_digit;
 
-    public PlayerOnlyGuess(){
+    public PlayerOnlyGuess() {
         max_turn = 7;
         max_digit = 4;
     }
 
 
-    public void start(){
+    public void start() {
 
         int[] computerSecreteNumber = setComputerSecreteNumber();
         game(computerSecreteNumber);
@@ -25,7 +22,7 @@ public class PlayerOnlyGuess {
 
     public int[] setComputerSecreteNumber() {
         List<Integer> list = new ArrayList<>();
-        for(int i = 0; i < 10; i++){
+        for (int i = 0; i < 10; i++) {
             list.add(i);
         }
 
@@ -44,10 +41,10 @@ public class PlayerOnlyGuess {
 
     }
 
-    public int[] getPlayerGuess(){
-        String playerGuessstr = "" ;
+    public int[] getPlayerGuess() {
+        String playerGuessstr = "";
         boolean valid = false;
-        while(!valid) {
+        while (!valid) {
             try {
                 playerGuessstr = Keyboard.readInput();
 
@@ -57,7 +54,7 @@ public class PlayerOnlyGuess {
 
                 for (int i = 0; i < max_digit; i++) {
                     for (int j = 0; j < max_digit; j++) {
-                        if( (i != j) && playerGuessstr.charAt(i) == playerGuessstr.charAt(j)){
+                        if ((i != j) && playerGuessstr.charAt(i) == playerGuessstr.charAt(j)) {
 
                             throw new SameNumberException("No same numbers!");
                         }
@@ -66,7 +63,7 @@ public class PlayerOnlyGuess {
                 }
                 valid = true;
 
-            } catch ( NumberFormatException | StringIndexOutOfBoundsException | SameNumberException e) {
+            } catch (NumberFormatException | StringIndexOutOfBoundsException | SameNumberException e) {
                 System.out.println("Error: " + e.getMessage() + " Try a valid number >> ");
 
             }
@@ -81,58 +78,57 @@ public class PlayerOnlyGuess {
     }
 
 
-
-
     public void game(int[] computerSecreteNumber) {
         boolean win = false;
-        int counter =0;
+        int counter = 0;
         System.out.println("Please enter your guess: ");
-            while (counter < 7 ) {
-                int [] playerGuess = getPlayerGuess();
-                counter++;
-                int bulls = getBulls(playerGuess, computerSecreteNumber);
-                int cows= getCows(playerGuess, computerSecreteNumber);
-                printEachResult(counter, bulls, cows, playerGuess);
-                win = winPlayer(playerGuess, computerSecreteNumber);
-                if(win){
-                    System.out.println("Congratulation! You win!");
-                    break;
-                }
-
+        while (counter < 7) {
+            int[] playerGuess = getPlayerGuess();
+            counter++;
+            int bulls = getBulls(playerGuess, computerSecreteNumber);
+            int cows = getCows(playerGuess, computerSecreteNumber);
+            printEachResult(counter, bulls, cows, playerGuess);
+            win = winPlayer(playerGuess, computerSecreteNumber);
+            if (win) {
+                System.out.println("Congratulation! You win!");
+                break;
             }
-            if(!win){System.out.println("Time's up. You didn't get it!");}
 
+        }
+        if (!win) {
+            System.out.println("Time's up. You didn't get it!");
+        }
 
 
     }
 
-    public boolean winPlayer(int[] playerGuess, int[] computerSecreteNumber){
+    public boolean winPlayer(int[] playerGuess, int[] computerSecreteNumber) {
 
         return Arrays.equals(playerGuess, computerSecreteNumber);
     }
 
-    public void printEachResult(int counter, int bulls, int cows, int[] playerGuess){
-        System.out.println("Turn "+ counter + " -Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
-        System.out.println("Results: " + bulls + " bulls " + cows + " cows") ;
+    public void printEachResult(int counter, int bulls, int cows, int[] playerGuess) {
+        System.out.println("Turn " + counter + " -Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
+        System.out.println("Results: " + bulls + " bulls " + cows + " cows");
         System.out.println("-----");
     }
 
 
-    public int getBulls(int[] playerGuess, int[] computerSecreteNumber){
+    public int getBulls(int[] playerGuess, int[] computerSecreteNumber) {
         int bulls = 0;
-        for (int i = 0; i < 4; i++) {
-            if(playerGuess[i] == computerSecreteNumber[i]){
-               bulls++;
+        for (int i = 0; i < max_digit; i++) {
+            if (playerGuess[i] == computerSecreteNumber[i]) {
+                bulls++;
             }
         }
         return bulls;
     }
 
-    public int getCows(int[] playerGuess, int[] computerSecreteNumber){
+    public int getCows(int[] playerGuess, int[] computerSecreteNumber) {
         int cows = 0;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if((i != j) && playerGuess[i] == computerSecreteNumber[j]){
+        for (int i = 0; i < max_digit; i++) {
+            for (int j = 0; j < max_digit; j++) {
+                if ((i != j) && playerGuess[i] == computerSecreteNumber[j]) {
                     cows++;
                 }
 
@@ -141,8 +137,6 @@ public class PlayerOnlyGuess {
         }
         return cows;
     }
-
-
 
 
 }

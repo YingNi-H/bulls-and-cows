@@ -18,6 +18,8 @@ public class HardAI extends MediumAI{
         this.autoGuess = new ArrayList<>();
 
         this.result = new ArrayList<>();
+        this.max_digit = 4;
+        this.max_turn = 7;
 
 
 
@@ -102,20 +104,6 @@ public class HardAI extends MediumAI{
         return autoGuess;
     }
 
-    @Override
-    public int[] setComputerSecreteNumber() {
-        return super.setComputerSecreteNumber();
-    }
-
-    @Override
-    public int[] setPlayerSecreteNumber() {
-        return super.setPlayerSecreteNumber();
-    }
-
-    @Override
-    public int[] getPlayerGuess() {
-        return super.getPlayerGuess();
-    }
 
 
     public List<int[]> printUnique () {
@@ -246,23 +234,6 @@ public class HardAI extends MediumAI{
 
 
 
-    @Override
-    public boolean winPlayer(int[] playerGuess, int[] computerSecreteNumber) {
-        return super.winPlayer(playerGuess, computerSecreteNumber);
-    }
-
-    @Override
-    public boolean winComputer(int[] computerGuess, int[] playerSecreteNumber) {
-        return super.winComputer(computerGuess, playerSecreteNumber);
-
-    }
-
-
-
-
-
-
-
 
     public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
         System.out.println("Turn "+ (counter +1 ) + " -Your guess: ");
@@ -294,30 +265,6 @@ public class HardAI extends MediumAI{
 
 
 
-    @Override
-    public int getBulls(int[] playerGuess, int[] computerSecreteNumber) {
-        return super.getBulls(playerGuess, computerSecreteNumber);
-    }
-
-    @Override
-    public int getCows(int[] playerGuess, int[] computerSecreteNumber) {
-        return super.getCows(playerGuess, computerSecreteNumber);
-    }
-
-    @Override
-    public int getBullsComputer(int[] computerGuess, int[] playerSecreteNumber) {
-
-        return super.getBullsComputer(computerGuess, playerSecreteNumber);
-    }
-
-
-
-    @Override
-    public int getCowsComputer(int[] computerGuess, int[] playerSecreteNumber) {
-
-            return super.getCowsComputer(computerGuess, playerSecreteNumber);
-
-    }
 
 
 }
