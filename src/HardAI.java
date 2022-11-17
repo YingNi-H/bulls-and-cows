@@ -176,7 +176,7 @@ public class HardAI extends MediumAI {
         boolean winCom = false;
         int counter = 0;
 
-        for (counter = 0; counter < 7; counter++) {
+        while (counter < 7) {
             System.out.println("Enter your guess > ");
             if (autoPlay) {
 
@@ -194,11 +194,10 @@ public class HardAI extends MediumAI {
 
             int bulls = getBulls(playerGuess, computerSecreteNumber);
             int cows = getCows(playerGuess, computerSecreteNumber);
-
             int[] computerGuess = getComputerGuess(combinations);
-
             int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
             int cowsComputer = getCows(computerGuess, playerSecreteNumber);
+            counter++;
             super.printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
 
             win = winPlayer(playerGuess, computerSecreteNumber);

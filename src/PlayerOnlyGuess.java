@@ -2,8 +2,8 @@ import java.util.*;
 
 
 public class PlayerOnlyGuess {
-    protected int max_turn;
-    protected int max_digit;
+    protected static int max_turn;
+    protected static int max_digit;
 
     public PlayerOnlyGuess() {
         max_turn = 7;
