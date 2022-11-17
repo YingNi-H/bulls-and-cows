@@ -4,8 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.*;
 
-public class HardAI extends MediumAI{
-    protected List<String> result;
+public class HardAI extends MediumAI {
     protected boolean autoPlay;
     protected String fileName;
     protected int[] playerGuess;
@@ -16,51 +15,43 @@ public class HardAI extends MediumAI{
         this.fileName = "";
         this.playerGuess = new int[4];
         this.autoGuess = new ArrayList<>();
-
         this.result = new ArrayList<>();
         this.max_digit = 4;
         this.max_turn = 7;
 
 
-
     }
 
-
+    @Override
     public void start() {
-        int[] playerSecreteNumber =setPlayerSecreteNumber();
-
+        int[] playerSecreteNumber = setPlayerSecreteNumber();
         int[] computerSecreteNumber = setComputerSecreteNumber();
-
         playerAuto();
-
-
-        List<int[]> combinations = printUnique ();
-
-
-        game(computerSecreteNumber, playerSecreteNumber,combinations, autoGuess);
+        List<int[]> combinations = printUnique();
+        game(computerSecreteNumber, playerSecreteNumber, combinations, autoGuess);
 
 
     }
 
-    public boolean playerAuto(){
+    public boolean playerAuto() {
 
         System.out.println("Do you want the computer to guess for you? Y/N");
         String t = Keyboard.readInput().toLowerCase();
-        if(t.equals("n")){
-          autoPlay = false;
+        if (t.equals("n")) {
+            autoPlay = false;
 
-        }else if(t.equals("y")){
+        } else if (t.equals("y")) {
             System.out.println("Enter a file name among \"auto1\", \"auto2\", \"auto3\", \"auto4\", \"auto5\", \"auto6\", and \"auto7\": ");
 
-            while(true) {
+            while (true) {
                 fileName = Keyboard.readInput().toLowerCase();
                 getAutoGuess(fileName);
                 if ((!fileName.equals("auto1")) && (!fileName.equals("auto2")) && (!fileName.equals("auto3")) && (!fileName.equals("auto4")) &&
-                            (!fileName.equals("auto5")) && (!fileName.equals("auto6")) && (!fileName.equals("auto7"))) {
-                        System.out.println("Invalid file name! Try again > ");
+                        (!fileName.equals("auto5")) && (!fileName.equals("auto6")) && (!fileName.equals("auto7"))) {
+                    System.out.println("Invalid file name! Try again > ");
 
                 } else {
-                break;
+                    break;
                 }
 
             }
@@ -72,26 +63,26 @@ public class HardAI extends MediumAI{
     }
 
 
-    public List<int[]> getAutoGuess(String fileName){
-            String line = "";
-            try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+    public List<int[]> getAutoGuess(String fileName) {
+        String line = "";
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
 
-                while ((line = reader.readLine()) != null) {
-                    //System.out.println(line);
-                    //System.out.println(line.length());
-                    playerGuess = new int[4];
-                    for (int i = 0; i < line.length(); i++) {
-                        playerGuess[i] = Integer.parseInt(line.substring(i,i+1));
-                        //System.out.print(playerGuess[i]);
+            while ((line = reader.readLine()) != null) {
+                //System.out.println(line);
+                //System.out.println(line.length());
+                playerGuess = new int[4];
+                for (int i = 0; i < line.length(); i++) {
+                    playerGuess[i] = Integer.parseInt(line.substring(i, i + 1));
+                    //System.out.print(playerGuess[i]);
 
-                    }
-                    autoGuess.add(playerGuess);
-                    //System.out.println(autoGuess.size());
                 }
-
-            }catch (IOException e) {
-                System.out.println("Error: " + e.getMessage());
+                autoGuess.add(playerGuess);
+                //System.out.println(autoGuess.size());
             }
+
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 //        playerGuess= autoGuess.get(2);
 //
 //        for (int i = 0; i < 4; i++) {
@@ -100,13 +91,11 @@ public class HardAI extends MediumAI{
 //        }
 
 
-
         return autoGuess;
     }
 
 
-
-    public List<int[]> printUnique () {
+    public List<int[]> printUnique() {
 
         List<int[]> combinations = new ArrayList<>();
         int[] computerCalculations = new int[4];
@@ -147,7 +136,7 @@ public class HardAI extends MediumAI{
     }
 
 
-    public int[] getComputerGuess(List<int[]> combinations){
+    public int[] getComputerGuess(List<int[]> combinations) {
         int[] computerGuess = new int[0];
         //System.out.println("computerGuess: "+combinations.size());
 
@@ -158,21 +147,21 @@ public class HardAI extends MediumAI{
 
     }
 
-    public List<int[]> getComputerStrategy(int[] computerGuess, List<int[]> combinations, int[] playerSecreteNumber){
+    public List<int[]> getComputerStrategy(int[] computerGuess, List<int[]> combinations, int[] playerSecreteNumber) {
         //System.out.println("Before each remove: "+combinations.size());
 
         int[] bullAndCowComputerGuess = new int[2];
-        bullAndCowComputerGuess[0] = getBullsComputer(computerGuess,playerSecreteNumber);
-        bullAndCowComputerGuess[1] = getCowsComputer(computerGuess,playerSecreteNumber);
+        bullAndCowComputerGuess[0] = getBullsComputer(computerGuess, playerSecreteNumber);
+        bullAndCowComputerGuess[1] = getCowsComputer(computerGuess, playerSecreteNumber);
 
         Iterator<int[]> bullCowAnalysis = combinations.iterator();
-        while(bullCowAnalysis.hasNext()){
+        while (bullCowAnalysis.hasNext()) {
             int[] element = bullCowAnalysis.next();
             int[] bullAndCow = new int[2];
-            bullAndCow[0] = getBullsComputer(element,computerGuess);
-            bullAndCow[1] = getCowsComputer(element,computerGuess);
-            if(!(Arrays.equals(bullAndCow, bullAndCowComputerGuess))){
-                 bullCowAnalysis.remove();
+            bullAndCow[0] = getBullsComputer(element, computerGuess);
+            bullAndCow[1] = getCowsComputer(element, computerGuess);
+            if (!(Arrays.equals(bullAndCow, bullAndCowComputerGuess))) {
+                bullCowAnalysis.remove();
             }
 
         }
@@ -182,84 +171,54 @@ public class HardAI extends MediumAI{
     }
 
 
-
-
     public void game(int[] computerSecreteNumber, int[] playerSecreteNumber, List<int[]> combinations, List<int[]> autoGuess) {
         boolean win = false;
         boolean winCom = false;
         int counter = 0;
 
-        for(counter = 0; counter < 7; counter++ ){
+        for (counter = 0; counter < 7; counter++) {
             System.out.println("Enter your guess > ");
-            if(autoPlay){
+            if (autoPlay) {
 
-                try{playerGuess = autoGuess.get(counter);
+                try {
+                    playerGuess = autoGuess.get(counter);
 
-                }catch(IndexOutOfBoundsException e){
+                } catch (IndexOutOfBoundsException e) {
                     playerGuess = getPlayerGuess();
                 }
 
-            }else {
+            } else {
                 playerGuess = getPlayerGuess();
 
             }
 
             int bulls = getBulls(playerGuess, computerSecreteNumber);
-            int cows= getCows(playerGuess, computerSecreteNumber);
+            int cows = getCows(playerGuess, computerSecreteNumber);
 
             int[] computerGuess = getComputerGuess(combinations);
 
             int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
-            int cowsComputer= getCows(computerGuess, playerSecreteNumber);
-            printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
+            int cowsComputer = getCows(computerGuess, playerSecreteNumber);
+            super.printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
 
             win = winPlayer(playerGuess, computerSecreteNumber);
             winCom = winComputer(computerGuess, playerSecreteNumber);
-            if(win){
+            if (win) {
                 System.out.println("Congratulation! You win!");
                 break;
-            }else if(winCom){
+            } else if (winCom) {
                 System.out.println("Computer win!");
                 break;
             }
-            combinations= getComputerStrategy(computerGuess ,combinations, playerSecreteNumber);
+            combinations = getComputerStrategy(computerGuess, combinations, playerSecreteNumber);
 
             //System.out.println(combinations.size());
 
         }
-        if((!win) && (!winCom) ){System.out.println("Draw! You and computer didn't get it!");}
-
-
-    }
-
-
-
-
-    public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess,int bullsComputer, int cowsComputer, int[] computerGuess) {
-        System.out.println("Turn "+ (counter +1 ) + " -Your guess: ");
-        for (int i = 0; i < 4; i++) {
-            System.out.print(playerGuess[i]);
-
+        if ((!win) && (!winCom)) {
+            System.out.println("Draw! You and computer didn't get it!");
         }
-        System.out.println();
-        System.out.println("Results: " + bulls + " bulls " + cows + " cows") ;
-        System.out.println("Computer guess: " );
-        for (int i = 0; i < 4; i++) {
-            System.out.print(computerGuess[i]);
 
-        }
-        System.out.println();
-        System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ") ;
-        System.out.println("----------");
-
-        String s = ("Turn "+ (counter + 1) + " -Your guess: " + playerGuess[0] + playerGuess[1] + playerGuess[2] + playerGuess[3] +
-                " Results: " + bulls + " bulls " + cows + " cows " +
-                " Computer guess: "+ computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
-                " Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
-
-        result.add(s);
-
-        return result;
 
     }
 

@@ -2,7 +2,6 @@ import java.util.*;
 
 
 public class PlayerOnlyGuess {
-
     protected int max_turn;
     protected int max_digit;
 
@@ -13,7 +12,6 @@ public class PlayerOnlyGuess {
 
 
     public void start() {
-
         int[] computerSecreteNumber = setComputerSecreteNumber();
         game(computerSecreteNumber);
 
@@ -103,7 +101,6 @@ public class PlayerOnlyGuess {
     }
 
     public boolean winPlayer(int[] playerGuess, int[] computerSecreteNumber) {
-
         return Arrays.equals(playerGuess, computerSecreteNumber);
     }
 

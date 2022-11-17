@@ -3,13 +3,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class EasyAI extends PlayerOnlyGuess {
-
     protected List<String> result;
 
 
     public EasyAI() {
         this.result = new ArrayList<>();
-
 
     }
 
@@ -17,13 +15,9 @@ public class EasyAI extends PlayerOnlyGuess {
     @Override
     public void start() {
         configurations();
-
         int[] playerSecreteNumber = setPlayerSecreteNumber();
-
         int[] computerSecreteNumber = setComputerSecreteNumber();
-
         game(computerSecreteNumber, playerSecreteNumber);
-
 
     }
 
@@ -100,8 +94,6 @@ public class EasyAI extends PlayerOnlyGuess {
         }
 
     }
-
-
 
 
     public boolean winComputer(int[] computerGuess, int[] playerSecreteNumber) {
