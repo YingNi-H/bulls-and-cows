@@ -22,22 +22,7 @@ public class MediumAI extends EasyAI {
 
 
     public int[] getComputerGuess() {
-        List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            list.add(i);
-        }
-
-        Collections.shuffle(list);
-
-        int[] computerGuess = new int[4];
-        for (int i = 0; i < 4; i++) {
-            computerGuess[i] = list.get(i);
-        }
-
-//        for(Integer element : computerGuess){
-//            System.out.println(element);
-//        }
-
+        int[] computerGuess = super.setComputerSecreteNumber();
 
         for (int i = 0; i < cG.size() - 1; i++) {
             if (Arrays.equals(cG.get(i), cG.get(i + 1))) {
