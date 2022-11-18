@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,8 +15,8 @@ public class HardAI extends MediumAI {
         this.playerGuess = new int[4];
         this.autoGuess = new ArrayList<>();
         this.result = new ArrayList<>();
-        this.max_digit = 4;
-        this.max_turn = 7;
+        max_digit = 4;
+        max_turn = 7;
 
 
     }
@@ -34,7 +33,6 @@ public class HardAI extends MediumAI {
     }
 
     public boolean playerAuto() {
-
         System.out.println("Do you want the computer to guess for you? Y/N");
         String t = Keyboard.readInput().toLowerCase();
         if (t.equals("n")) {
@@ -96,15 +94,13 @@ public class HardAI extends MediumAI {
 
 
     public List<int[]> printUnique() {
-
         List<int[]> combinations = new ArrayList<>();
-        int[] computerCalculations = new int[4];
+        int[] computerCalculations;
 
         //This code was referred to https://www.geeksforgeeks.org/numbers-unique-distinct-digits/
         //and modified majorly by Jenny Wang. One line was modified by Ying-Ni Huang.
         int l = 99, r = 10000;
-        int i = 0;
-        for (i = l; i <= r; i++) {
+        for (int i = l; i <= r; i++) {
             int num = i;
             boolean[] visited = new boolean[10];
 
@@ -137,7 +133,7 @@ public class HardAI extends MediumAI {
 
 
     public int[] getComputerGuess(List<int[]> combinations) {
-        int[] computerGuess = new int[0];
+        int[] computerGuess;
         //System.out.println("computerGuess: "+combinations.size());
 
         Collections.shuffle(combinations);
@@ -151,15 +147,15 @@ public class HardAI extends MediumAI {
         //System.out.println("Before each remove: "+combinations.size());
 
         int[] bullAndCowComputerGuess = new int[2];
-        bullAndCowComputerGuess[0] = getBullsComputer(computerGuess, playerSecreteNumber);
-        bullAndCowComputerGuess[1] = getCowsComputer(computerGuess, playerSecreteNumber);
+        bullAndCowComputerGuess[0] = getBulls(computerGuess, playerSecreteNumber);
+        bullAndCowComputerGuess[1] = getCows(computerGuess, playerSecreteNumber);
 
         Iterator<int[]> bullCowAnalysis = combinations.iterator();
         while (bullCowAnalysis.hasNext()) {
             int[] element = bullCowAnalysis.next();
             int[] bullAndCow = new int[2];
-            bullAndCow[0] = getBullsComputer(element, computerGuess);
-            bullAndCow[1] = getCowsComputer(element, computerGuess);
+            bullAndCow[0] = getBulls(element, computerGuess);
+            bullAndCow[1] = getCows(element, computerGuess);
             if (!(Arrays.equals(bullAndCow, bullAndCowComputerGuess))) {
                 bullCowAnalysis.remove();
             }
@@ -184,11 +180,11 @@ public class HardAI extends MediumAI {
                     playerGuess = autoGuess.get(counter);
 
                 } catch (IndexOutOfBoundsException e) {
-                    playerGuess = getPlayerGuess();
+                    playerGuess = super.getPlayerGuess();
                 }
 
             } else {
-                playerGuess = getPlayerGuess();
+                playerGuess = super.getPlayerGuess();
 
             }
 
@@ -220,9 +216,6 @@ public class HardAI extends MediumAI {
 
 
     }
-
-
-
 
 
 }

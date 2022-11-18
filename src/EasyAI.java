@@ -152,30 +152,5 @@ public class EasyAI extends PlayerOnlyGuess {
     }
 
 
-    public int getBullsComputer(int[] computerGuess, int[] playerSecreteNumber) {
-        int bullsComputer = 0;
-        for (int i = 0; i < max_digit; i++) {
-            if (computerGuess[i] == playerSecreteNumber[i]) {
-                bullsComputer++;
-            }
-        }
-        return bullsComputer;
-    }
-
-
-    public int getCowsComputer(int[] computerGuess, int[] playerSecreteNumber) {
-        int cowsComputer = 0;
-        for (int i = 0; i < max_digit; i++) {
-            for (int j = 0; j < max_digit; j++) {
-                if ((i != j) && computerGuess[i] == playerSecreteNumber[j]) {
-                    cowsComputer++;
-                }
-
-            }
-
-        }
-        return cowsComputer;
-    }
-
 
 }

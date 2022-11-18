@@ -8,8 +8,8 @@ public class MediumAI extends EasyAI {
     public MediumAI() {
         this.result = new ArrayList<>();
         this.cG = new ArrayList<>();
-        this.max_turn = 7;
-        this.max_digit = 4;
+        max_turn = 7;
+        max_digit = 4;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class MediumAI extends EasyAI {
 
     public int[] getComputerGuess() {
         int[] computerGuess = super.setComputerSecreteNumber();
-
+//        List<int[]> cG = new ArrayList<>(); // List won't increase- why??
         for (int i = 0; i < cG.size() - 1; i++) {
             if (Arrays.equals(cG.get(i), cG.get(i + 1))) {
                 cG.remove(cG.get(i + 1));
@@ -32,6 +32,7 @@ public class MediumAI extends EasyAI {
         }
         cG.add(computerGuess);
 
+// Test whether cG List does check computerGuess repetition.
 //        for(int i = 0; i < cG.size(); i++){
 //            int[] cGuess = cG.get(i);
 //            for (int j = 0; j < cGuess.length; j++) {
@@ -58,7 +59,6 @@ public class MediumAI extends EasyAI {
             int bulls = getBulls(playerGuess, computerSecreteNumber);
             int cows = getCows(playerGuess, computerSecreteNumber);
             int[] computerGuess = getComputerGuess();
-
             int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
             int cowsComputer = getCows(computerGuess, playerSecreteNumber);
             super.printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
@@ -78,9 +78,6 @@ public class MediumAI extends EasyAI {
         }
 
     }
-
-
-
 
 
 }
