@@ -17,9 +17,8 @@ public class HardAI extends MediumAI {
         this.result = new ArrayList<>();
         max_digit = 4;
         max_turn = 7;
-
-
     }
+
 
     @Override
     public void start() {
@@ -28,8 +27,6 @@ public class HardAI extends MediumAI {
         playerAuto();
         List<int[]> combinations = printUnique();
         game(computerSecreteNumber, playerSecreteNumber, combinations, autoGuess);
-
-
     }
 
     public boolean playerAuto() {
@@ -37,10 +34,8 @@ public class HardAI extends MediumAI {
         String t = Keyboard.readInput().toLowerCase();
         if (t.equals("n")) {
             autoPlay = false;
-
         } else if (t.equals("y")) {
             System.out.println("Enter a file name among \"auto1\", \"auto2\", \"auto3\", \"auto4\", \"auto5\", \"auto6\", and \"auto7\": ");
-
             while (true) {
                 fileName = Keyboard.readInput().toLowerCase();
                 getAutoGuess(fileName);
@@ -51,11 +46,8 @@ public class HardAI extends MediumAI {
                 } else {
                     break;
                 }
-
             }
-
             autoPlay = true;
-
         }
         return autoPlay;
     }
@@ -64,31 +56,17 @@ public class HardAI extends MediumAI {
     public List<int[]> getAutoGuess(String fileName) {
         String line = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-
             while ((line = reader.readLine()) != null) {
-                //System.out.println(line);
-                //System.out.println(line.length());
                 playerGuess = new int[4];
                 for (int i = 0; i < line.length(); i++) {
                     playerGuess[i] = Integer.parseInt(line.substring(i, i + 1));
-                    //System.out.print(playerGuess[i]);
-
                 }
                 autoGuess.add(playerGuess);
-                //System.out.println(autoGuess.size());
             }
 
         } catch (IOException e) {
             System.out.println("Error: " + e.getMessage());
         }
-//        playerGuess= autoGuess.get(2);
-//
-//        for (int i = 0; i < 4; i++) {
-//            System.out.println(playerGuess[i]);
-//
-//        }
-
-
         return autoGuess;
     }
 
@@ -103,7 +81,6 @@ public class HardAI extends MediumAI {
         for (int i = l; i <= r; i++) {
             int num = i;
             boolean[] visited = new boolean[10];
-
             while (num != 0) {
                 if (visited[num % 10]) {
                     break;
@@ -111,7 +88,6 @@ public class HardAI extends MediumAI {
                 visited[num % 10] = true;
                 num = num / 10;
             }
-
             if (num == 0) {
                 int counter = 3;
                 int a = i;
@@ -119,33 +95,23 @@ public class HardAI extends MediumAI {
                 for (counter = 3; counter >= 0; counter--) {
                     computerCalculations[counter] = a % 10;
                     a = a / 10;
-
                 }
                 combinations.add(computerCalculations);
-
             }
-
         }
-
         return combinations;
-
     }
 
 
     public int[] getComputerGuess(List<int[]> combinations) {
         int[] computerGuess;
-        //System.out.println("computerGuess: "+combinations.size());
-
         Collections.shuffle(combinations);
-
         computerGuess = combinations.get(0);
         return computerGuess;
-
     }
 
-    public List<int[]> getComputerStrategy(int[] computerGuess, List<int[]> combinations, int[] playerSecreteNumber) {
-        //System.out.println("Before each remove: "+combinations.size());
 
+    public List<int[]> getComputerStrategy(int[] computerGuess, List<int[]> combinations, int[] playerSecreteNumber) {
         int[] bullAndCowComputerGuess = new int[2];
         bullAndCowComputerGuess[0] = getBulls(computerGuess, playerSecreteNumber);
         bullAndCowComputerGuess[1] = getCows(computerGuess, playerSecreteNumber);
@@ -159,11 +125,8 @@ public class HardAI extends MediumAI {
             if (!(Arrays.equals(bullAndCow, bullAndCowComputerGuess))) {
                 bullCowAnalysis.remove();
             }
-
         }
-        //System.out.println("Combinations size after remove: " + combinations.size());
         return combinations;
-
     }
 
 
@@ -171,31 +134,25 @@ public class HardAI extends MediumAI {
         boolean win = false;
         boolean winCom = false;
         int counter = 0;
-
         while (counter < 7) {
             System.out.println("Enter your guess > ");
             if (autoPlay) {
-
                 try {
                     playerGuess = autoGuess.get(counter);
-
                 } catch (IndexOutOfBoundsException e) {
-                    playerGuess = super.getPlayerGuess();
+                    playerGuess = getPlayerGuess();
                 }
-
             } else {
-                playerGuess = super.getPlayerGuess();
-
+                playerGuess = getPlayerGuess();
             }
-
             int bulls = getBulls(playerGuess, computerSecreteNumber);
             int cows = getCows(playerGuess, computerSecreteNumber);
             int[] computerGuess = getComputerGuess(combinations);
             int bullsComputer = getBulls(computerGuess, playerSecreteNumber);
             int cowsComputer = getCows(computerGuess, playerSecreteNumber);
+            combinations = getComputerStrategy(computerGuess, combinations, playerSecreteNumber);
             counter++;
-            super.printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
-
+            printEachResult(counter, bulls, cows, playerGuess, bullsComputer, cowsComputer, computerGuess);
             win = winPlayer(playerGuess, computerSecreteNumber);
             winCom = winComputer(computerGuess, playerSecreteNumber);
             if (win) {
@@ -205,18 +162,10 @@ public class HardAI extends MediumAI {
                 System.out.println("Computer win!");
                 break;
             }
-            combinations = getComputerStrategy(computerGuess, combinations, playerSecreteNumber);
-
-            //System.out.println(combinations.size());
-
         }
         if ((!win) && (!winCom)) {
             System.out.println("Draw! You and computer didn't get it!");
         }
-
-
     }
-
-
 }
 
