@@ -12,38 +12,25 @@ public class MediumAI extends EasyAI {
         max_digit = 4;
     }
 
+
     @Override
     public void start() {
         int[] playerSecreteNumber = setPlayerSecreteNumber();
         int[] computerSecreteNumber = setComputerSecreteNumber();
         game(computerSecreteNumber, playerSecreteNumber);
-
     }
 
 
     public int[] getComputerGuess() {
-        int[] computerGuess = super.setComputerSecreteNumber();
-//        List<int[]> cG = new ArrayList<>(); // List won't increase- why??
+        int[] computerGuess = setComputerSecreteNumber();
+//        List<int[]> cG = new ArrayList<>(); // List won't increase- why?? Coz every itertion, it creates a new Array.
         for (int i = 0; i < cG.size() - 1; i++) {
             if (Arrays.equals(cG.get(i), cG.get(i + 1))) {
                 cG.remove(cG.get(i + 1));
-
             }
         }
         cG.add(computerGuess);
-
-// Test whether cG List does check computerGuess repetition.
-//        for(int i = 0; i < cG.size(); i++){
-//            int[] cGuess = cG.get(i);
-//            for (int j = 0; j < cGuess.length; j++) {
-//                System.out.print(cGuess[j] );
-//            }
-//            System.out.println( "size:" + cG.size());
-//
-//        }
-
         return computerGuess;
-
     }
 
 
@@ -51,7 +38,6 @@ public class MediumAI extends EasyAI {
         boolean win = false;
         boolean winCom = false;
         int counter = 0;
-
         while (counter < 7) {
             System.out.print("Enter your guess > ");
             int[] playerGuess = getPlayerGuess();
@@ -71,13 +57,9 @@ public class MediumAI extends EasyAI {
                 System.out.println("Computer win!");
                 break;
             }
-
         }
         if ((!win) && (!winCom)) {
             System.out.println("Draw! You and computer didn't get it!");
         }
-
     }
-
-
 }
