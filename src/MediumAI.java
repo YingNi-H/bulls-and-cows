@@ -23,7 +23,6 @@ public class MediumAI extends EasyAI {
 
     public int[] getComputerGuess() {
         int[] computerGuess = setComputerSecreteNumber();
-//        List<int[]> cG = new ArrayList<>(); // List won't increase- why?? Coz every itertion, it creates a new Array.
         for (int i = 0; i < cG.size() - 1; i++) {
             if (Arrays.equals(cG.get(i), cG.get(i + 1))) {
                 cG.remove(cG.get(i + 1));
