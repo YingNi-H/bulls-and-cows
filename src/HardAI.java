@@ -20,7 +20,6 @@ public class HardAI extends MediumAI {
     }
 
 
-    @Override
     public void start() {
         int[] playerSecreteNumber = setPlayerSecreteNumber();
         int[] computerSecreteNumber = setComputerSecreteNumber();
@@ -28,6 +27,7 @@ public class HardAI extends MediumAI {
         List<int[]> combinations = printUnique();
         game(computerSecreteNumber, playerSecreteNumber, combinations, autoGuess);
     }
+
 
     public boolean playerAuto() {
         System.out.println("Do you want the computer to guess for you? Y/N");
@@ -135,14 +135,16 @@ public class HardAI extends MediumAI {
         boolean winCom = false;
         int counter = 0;
         while (counter < 7) {
-            System.out.println("Enter your guess > ");
+
             if (autoPlay) {
                 try {
                     playerGuess = autoGuess.get(counter);
                 } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Enter your guess > ");
                     playerGuess = getPlayerGuess();
                 }
             } else {
+                System.out.println("Enter your guess > ");
                 playerGuess = getPlayerGuess();
             }
             int bulls = getBulls(playerGuess, computerSecreteNumber);

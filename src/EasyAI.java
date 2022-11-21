@@ -3,23 +3,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class EasyAI extends PlayerOnlyGuess {
-    protected List<String> result;
-
 
     public EasyAI() {
         this.result = new ArrayList<>();
-
     }
 
 
-    @Override
     public void start() {
         configurations();
         int[] playerSecreteNumber = setPlayerSecreteNumber();
         int[] computerSecreteNumber = setComputerSecreteNumber();
         game(computerSecreteNumber, playerSecreteNumber);
-
     }
+
 
     private void configurations() {
         System.out.println("Please choose maximum turns of guesses 7 or 10:  ");
@@ -67,7 +63,6 @@ public class EasyAI extends PlayerOnlyGuess {
         boolean win = false;
         boolean winCom = false;
         int counter = 0;
-
         while (counter < max_turn) {
             System.out.print("Enter your guess > ");
             int[] playerGuess = getPlayerGuess();
@@ -102,55 +97,23 @@ public class EasyAI extends PlayerOnlyGuess {
 
 
     public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess, int bullsComputer, int cowsComputer, int[] computerGuess) {
-        System.out.println("Turn " + counter + " -Your guess: ");
+        String a = "Turn " + counter + " -Your guess: ";
+        String b = "";
         for (int i = 0; i < max_digit; i++) {
-            System.out.print(playerGuess[i]);
-
+            b += playerGuess[i];
         }
-        System.out.println();
-        System.out.println("Results: " + bulls + " bulls " + cows + " cows ");
-        System.out.println("Computer guess: ");
+        String c = "Results: " + bulls + " bulls " + cows + " cows ";
+        String d = "Computer guess: ";
+        String e = "";
         for (int i = 0; i < max_digit; i++) {
-            System.out.print(computerGuess[i]);
-
+            e += computerGuess[i];
         }
-        System.out.println();
-        System.out.println("Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
-        System.out.println("----------");
-
-        //The above print out is duplicate with the following String s.
-        //I tried to reduce duplication while keeping the format of my print out.
-        //So far, I couldn't achieve both but clear format is important for user experience.
-        //So I keep the duplication.
-
+        String f = "Results: " + bullsComputer + " bulls " + cowsComputer + " cows ";
+        String g = "------------------------";
         String s = "";
-
-        if (max_digit == 4) {
-            s = ("Turn " + counter + " -Your guess: " + playerGuess[0] + playerGuess[1] + playerGuess[2] + playerGuess[3] +
-                    " Results: " + bulls + " bulls " + cows + " cows " +
-                    " Computer guess: " + computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
-                    " Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
-        }
-        if (max_digit == 6) {
-            s = ("Turn " + counter + " -Your guess: " + playerGuess[0] + playerGuess[1] + playerGuess[2] + playerGuess[3] +
-                    playerGuess[4] + playerGuess[5] +
-                    " Results: " + bulls + " bulls " + cows + " cows " +
-                    " Computer guess: " + computerGuess[0] + computerGuess[1] + computerGuess[2] + computerGuess[3] +
-                    computerGuess[4] + computerGuess[5] +
-                    " Results: " + bullsComputer + " bulls " + cowsComputer + " cows ");
-
-        }
-
-        //I also tried to improve the duplication in the if, else if for String s.
-        //It caused exception, so I didn't change.
-
+        s = a+b+"\r\n"+c+"\r\n"+d+e+"\r\n"+f+"\r\n"+g;
+        System.out.println(s);
         result.add(s);
-
-
         return result;
-
     }
-
-
-
 }

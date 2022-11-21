@@ -13,7 +13,6 @@ public class MediumAI extends EasyAI {
     }
 
 
-    @Override
     public void start() {
         int[] playerSecreteNumber = setPlayerSecreteNumber();
         int[] computerSecreteNumber = setComputerSecreteNumber();

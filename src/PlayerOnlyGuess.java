@@ -4,8 +4,10 @@ import java.util.*;
 public class PlayerOnlyGuess {
     protected static int max_turn;
     protected static int max_digit;
+    protected List<String> result;
 
     public PlayerOnlyGuess() {
+        this.result = new ArrayList<>();
         max_turn = 7;
         max_digit = 4;
     }
@@ -63,8 +65,8 @@ public class PlayerOnlyGuess {
     public void game(int[] computerSecreteNumber) {
         boolean win = false;
         int counter = 0;
-        System.out.println("Please enter your guess: ");
         while (counter < 7) {
+            System.out.println("Please enter your guess: ");
             int[] playerGuess = getPlayerGuess();
             counter++;
             int bulls = getBulls(playerGuess, computerSecreteNumber);
@@ -87,10 +89,19 @@ public class PlayerOnlyGuess {
     }
 
 
-    public void printEachResult(int counter, int bulls, int cows, int[] playerGuess) {
-        System.out.println("Turn " + counter + " -Your guess: " + playerGuess[0] + "" + playerGuess[1] + "" + playerGuess[2] + "" + playerGuess[3]);
-        System.out.println("Results: " + bulls + " bulls " + cows + " cows");
-        System.out.println("-----");
+    public List<String> printEachResult(int counter, int bulls, int cows, int[] playerGuess) {
+        String a = "Turn " + counter + " -Your guess: ";
+        String b = "";
+        for (int i = 0; i < max_digit; i++) {
+            b += playerGuess[i];
+        }
+        String c = "Results: " + bulls + " bulls " + cows + " cows ";
+        String g = "------------------------";
+        String s = "";
+        s = a+b+"\r\n"+c+g;
+        System.out.println(s);
+        result.add(s);
+        return result;
     }
 
 
@@ -104,6 +115,7 @@ public class PlayerOnlyGuess {
         return bulls;
     }
 
+
     public int getCows(int[] playerGuess, int[] computerSecreteNumber) {
         int cows = 0;
         for (int i = 0; i < max_digit; i++) {
@@ -111,9 +123,7 @@ public class PlayerOnlyGuess {
                 if ((i != j) && playerGuess[i] == computerSecreteNumber[j]) {
                     cows++;
                 }
-
             }
-
         }
         return cows;
     }

@@ -14,80 +14,61 @@ public class GameControl {
     private String level;
 
 
-
-
-
     public void start(){
         level = chooseLevel();
-        if(!((level.toLowerCase()).equals("playeronly") ||(level.toLowerCase()).equals("1") )){
-            saveFile(level);
-        }
-
-
+        saveFile(level);
     }
 
 
-
-
     public void saveFile(String level) {
-
-
         System.out.println("Do you want to save result? Y/N");
         String str = Keyboard.readInput();
         while(true){
             if(str.toLowerCase().equals("n")){
-            System.out.println("Bye~");
-            break;
-
+                System.out.println("Bye~");
+                break;
             }else if(str.toLowerCase().equals("y")) {
-            System.out.println("Enter a file name: ");
-            String fileName = Keyboard.readInput();
-            File myFile = new File(fileName);
-            try (BufferedWriter bW = new BufferedWriter(new FileWriter(myFile))) {
-
-                switch (level) {
-                    case "2":
-                    case "easy":
-                        for (int i = 0; i < easy.result.size(); i++) {
-                            bW.write(easy.result.get(i));
-                            bW.newLine();
-                        }
-                        break;
-
-                    case "3":
-                    case "medium":
-                        for (int i = 0; i < medium.result.size(); i++) {
-                            bW.write(medium.result.get(i));
-                            bW.newLine();
-                        }
-                        break;
-
-                    case "4":
-                    case "hard":
-                        for (int i = 0; i < hard.result.size(); i++) {
-                            bW.write(hard.result.get(i));
-                            bW.newLine();
-                        }
-
-                        break;
-
+                System.out.println("Enter a file name: ");
+                String fileName = Keyboard.readInput();
+                File myFile = new File(fileName);
+                try (BufferedWriter bW = new BufferedWriter(new FileWriter(myFile))) {
+                    switch (level) {
+                        case "1":
+                        case "playeronly":
+                            for (int i = 0; i < only.result.size(); i++) {
+                                bW.write(only.result.get(i));
+                                bW.newLine();
+                            }
+                            break;
+                        case "2":
+                        case "easy":
+                            for (int i = 0; i < easy.result.size(); i++) {
+                                bW.write(easy.result.get(i));
+                                bW.newLine();
+                            }
+                            break;
+                        case "3":
+                        case "medium":
+                            for (int i = 0; i < medium.result.size(); i++) {
+                                bW.write(medium.result.get(i));
+                                bW.newLine();
+                            }
+                            break;
+                        case "4":
+                        case "hard":
+                            for (int i = 0; i < hard.result.size(); i++) {
+                                bW.write(hard.result.get(i));
+                                bW.newLine();
+                            }
+                            break;
+                    }
+                } catch (IOException e) {
+                    System.out.println("Error: " + e.getMessage());
                 }
-
-            } catch (IOException e) {
-                System.out.println("Error: " + e.getMessage());
+                break;
             }
-            break;
-            }
-
-//            if(!str.toLowerCase().equals("n")||!str.toLowerCase().equals("y")){
-//                System.out.println("Enter Y/N: ");
-//                continue;
-//            }
-
         }
     }
-
-
 
 
     public String chooseLevel(){
@@ -98,11 +79,8 @@ public class GameControl {
         System.out.println("3 - Medium");
         System.out.println("4 - Hard");
         System.out.print(">> ");
-
         boolean valid = false;
-
         while(!valid) {
-
                 level = Keyboard.readInput().toLowerCase();
                 switch (level) {
                     case "playeronly":
@@ -131,19 +109,13 @@ public class GameControl {
                         break;
                     default:
                         System.out.println("Invalid command! Try again >>");
-
                 }
-
-
         }
         return level;
-
     }
-
 
 
     public static void main(String[] args) {
         new GameControl().start();
-
     }
 }
